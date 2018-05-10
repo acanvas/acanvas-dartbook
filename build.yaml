@@ -1,0 +1,19 @@
+# Read about `build.yaml` at https://pub.dartlang.org/packages/build_config
+targets:
+  $default:
+    sources:
+      {"exclude" : ["bin/**"]}
+    builders:
+      build_web_compilers|entrypoint:
+        generate_for:
+          - web/index.dart
+        dev_options:
+          compiler: dartdevc
+          ignore_cast_failures: true
+        release_options:
+          compiler: dart2js
+          ignore_cast_failures: true
+          dart2js_args:
+            - --fast-startup
+            - --minify
+            - --trust-type-annotations
