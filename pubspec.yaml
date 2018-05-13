@@ -1,5 +1,5 @@
 name: dartbook
-version: 0.1.1
+version: 0.1.1-dev
 description: The infamous Flex book component in pure Dart.
 environment:
   sdk: '>=2.0.0-dev.54.0 <2.0.0'
