@@ -3,7 +3,7 @@ build/
 .dart_tool/
 packages
 pubspec.lock
-.idea
+.idea/
 .DS_Store
 .settings
 .project

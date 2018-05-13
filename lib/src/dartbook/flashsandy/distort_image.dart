@@ -171,7 +171,6 @@ class DistortImage {
   void __render(Graphics graphics, BitmapData bmd) {
     _tMat = new Matrix.fromIdentity();
     _sMat = new Matrix.fromIdentity();
-    var _spcMat = new Matrix.fromIdentity();
     /*Object*/
     Map<String, num> p0, p1, p2;
     List<Map<String, num>> a;

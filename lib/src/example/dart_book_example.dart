@@ -20,8 +20,6 @@ class DartBookExample {
     Rd.STAGE = stage;
     new RenderLoop()..addStage(stage);
     BookSampleAssets.load(start);
-
-    ResourceManager mgr = new ResourceManager();
   }
 
   void start() {

@@ -1,11 +1,11 @@
 name: dartbook
-version: 0.1.0
-description: Port of Ruben Swieringa's Flexbook in pure Dart.
+version: 0.1.1
+description: The infamous Flex book component in pure Dart.
 environment:
-  sdk: '>=2.0.0-dev.54 <2.0.0'
+  sdk: '>=2.0.0-dev.54.0 <2.0.0'
 dependencies:
-  logging: any
-  stagexl: any
+  stagexl:
+    git: https://github.com/bp74/StageXL/
   rockdot_commons:
     git: https://github.com/block-forest/rockdot-commons
 dev_dependencies:
