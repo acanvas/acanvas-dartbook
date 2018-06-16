@@ -1,4 +1,4 @@
-part of dartbook;
+part of acanvas_dartbook;
 
 /**
  * Describes a line consisting of two Points.
@@ -88,9 +88,11 @@ class Line extends InfiniteLine {
     num angle = line.getAngle();
     // calculate ends:
     Line newLine = new Line();
-    newLine.a = new Point(point1.x + range * cos(angle), point1.y + range * sin(angle));
+    newLine.a =
+        new Point(point1.x + range * cos(angle), point1.y + range * sin(angle));
     angle += pi;
-    newLine.b = new Point(point1.x + range * cos(angle), point1.y + range * sin(angle));
+    newLine.b =
+        new Point(point1.x + range * cos(angle), point1.y + range * sin(angle));
     // return value:
     return newLine;
   }
@@ -177,7 +179,8 @@ class Line extends InfiniteLine {
    * @returns	bool
    */
   bool containsLine(Line line, [bool round = true]) {
-    return (this.containsPoint(line.a, round) && this.containsPoint(line.b, round));
+    return (this.containsPoint(line.a, round) &&
+        this.containsPoint(line.b, round));
   }
 
   /**
@@ -194,7 +197,8 @@ class Line extends InfiniteLine {
    * @returns	bool
    */
   bool containsLinePartially(Line line, [bool round = true]) {
-    return ((this.containsPoint(line.a, round) || this.containsPoint(line.b, round)) &&
+    return ((this.containsPoint(line.a, round) ||
+            this.containsPoint(line.b, round)) &&
         this.xCoefficient == line.xCoefficient);
   }
 
@@ -322,9 +326,11 @@ class Line extends InfiniteLine {
     // reposition both ends of this Line:
     num angle = this.getAngle();
     angle += pi;
-    this._a = new Point(xIntersect.x + dist1 * cos(angle), xIntersect.y + dist1 * sin(angle));
+    this._a = new Point(
+        xIntersect.x + dist1 * cos(angle), xIntersect.y + dist1 * sin(angle));
     angle += pi;
-    this._b = new Point(xIntersect.x + dist2 * cos(angle), xIntersect.y + dist2 * sin(angle));
+    this._b = new Point(
+        xIntersect.x + dist2 * cos(angle), xIntersect.y + dist2 * sin(angle));
   }
 
   /**
@@ -347,8 +353,10 @@ class Line extends InfiniteLine {
     // reposition both ends of this Line:
     num angle = this.getAngle();
     angle += pi;
-    this._a = new Point(xIntersect.x + dist1 * cos(angle), xIntersect.y + dist1 * sin(angle));
+    this._a = new Point(
+        xIntersect.x + dist1 * cos(angle), xIntersect.y + dist1 * sin(angle));
     angle += pi;
-    this._b = new Point(xIntersect.x + dist2 * cos(angle), xIntersect.y + dist2 * sin(angle));
+    this._b = new Point(
+        xIntersect.x + dist2 * cos(angle), xIntersect.y + dist2 * sin(angle));
   }
 }

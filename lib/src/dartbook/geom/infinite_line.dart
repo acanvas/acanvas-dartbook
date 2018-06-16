@@ -1,4 +1,4 @@
-part of dartbook;
+part of acanvas_dartbook;
 
 /**
  * Describes a line consisting of a slope (and as coefficient) an intersection-point with either the x or y axis.
@@ -149,7 +149,8 @@ class InfiniteLine {
     // calculate intersection:
     point1 = (a.y < b.y) ? a : b;
     point2 = (a.y > b.y) ? a : b;
-    this.setXIntersection(point2.x - (point2.y / (point2.y - point1.y)) * (point2.x - point1.x));
+    this.setXIntersection(
+        point2.x - (point2.y / (point2.y - point1.y)) * (point2.x - point1.x));
     // don't lose yIntersection:
     if (this.horizontal) {
       this.setYIntersection(a.y);
@@ -212,7 +213,9 @@ class InfiniteLine {
    * @return	Point
    */
   Point getPointByX(num x) {
-    num y = (this.horizontal) ? this.yIntersection : this.yIntersection + x * this.xCoefficient;
+    num y = (this.horizontal)
+        ? this.yIntersection
+        : this.yIntersection + x * this.xCoefficient;
     return new Point(x, y);
   }
 
@@ -224,7 +227,9 @@ class InfiniteLine {
    * @return	Point
    */
   Point getPointByY(num y) {
-    num x = (this.vertical) ? this.xIntersection : this.xIntersection + y * this.yCoefficient;
+    num x = (this.vertical)
+        ? this.xIntersection
+        : this.xIntersection + y * this.yCoefficient;
     return new Point(x, y);
   }
 
@@ -336,7 +341,8 @@ class InfiniteLine {
       return;
     }
     if (value == true) {
-      this.yCoefficient = (this.yCoefficient >= 0) ? double.infinity : double.negativeInfinity;
+      this.yCoefficient =
+          (this.yCoefficient >= 0) ? double.infinity : double.negativeInfinity;
     } else {
       this.yCoefficient = 1;
     }

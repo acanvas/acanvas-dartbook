@@ -1,4 +1,4 @@
-part of dartbook;
+part of acanvas_dartbook;
 
 /**
  * Dispatched when a page is added to or removed from the PageManager.
@@ -189,7 +189,8 @@ class PageManager extends LifecycleSprite {
       if (index < this._pages.length - 1) {
         this.jumpViewStacks(index + 1);
       }
-      if (StateManager.instance.getState(this) == StateManager.UPDATE_COMPLETE) {
+      if (StateManager.instance.getState(this) ==
+          StateManager.UPDATE_COMPLETE) {
         this.refreshViewStacks();
       }
       // return value:
@@ -341,7 +342,10 @@ class PageManager extends LifecycleSprite {
       // if both children are Pages, treat them special
       int index1 = (child1).index;
       int index2 = (child2).index;
-      if ((child1).book != this || index1 == -1 || (child2).book != this || index2 == -1) {
+      if ((child1).book != this ||
+          index1 == -1 ||
+          (child2).book != this ||
+          index2 == -1) {
         throw new ArgumentError(BookError.PAGE_NOT_CHILD);
       }
       super.swapChildren(child1, child2);
@@ -431,7 +435,9 @@ class PageManager extends LifecycleSprite {
    */
   @override
   bool contains(DisplayObject child) {
-    return (this.pageL.contains(child) || this.pageR.contains(child) || child == this);
+    return (this.pageL.contains(child) ||
+        this.pageR.contains(child) ||
+        child == this);
   }
 
   // COMMON USAGE:
@@ -501,15 +507,17 @@ class PageManager extends LifecycleSprite {
    * @
    */
   void refreshViewStacks() {
-    this.pageL.visible =
-        ((!this.isFirstPage(this._currentPage + 1) || this._pages.length <= 1) && this.pageL.numChildren > 0);
+    this.pageL.visible = ((!this.isFirstPage(this._currentPage + 1) ||
+            this._pages.length <= 1) &&
+        this.pageL.numChildren > 0);
     if (this.pageL.visible) {
       this.pageL.selectedChild = (this._pages[this._currentPage]);
     }
     this.pageL.refresh();
 
     this.pageR.visible =
-        ((!this.isLastPage(this._currentPage) || this._pages.length <= 1) && this.pageR.numChildren > 0);
+        ((!this.isLastPage(this._currentPage) || this._pages.length <= 1) &&
+            this.pageR.numChildren > 0);
     if (this.pageR.visible) {
       this.pageR.selectedChild = (this._pages[this._currentPage + 1]);
     }
@@ -609,7 +617,8 @@ class PageManager extends LifecycleSprite {
    * @
    */
   bool get created {
-    return (StateManager.instance.getState(this) >= StateManager.CREATION_COMPLETE);
+    return (StateManager.instance.getState(this) >=
+        StateManager.CREATION_COMPLETE);
   }
 
   /**

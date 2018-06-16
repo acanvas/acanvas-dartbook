@@ -1,4 +1,4 @@
-part of dartbook;
+part of acanvas_dartbook;
 
 /**
  * Dispatched when the user picks up the corner of a page.
@@ -481,12 +481,17 @@ class DartBook extends PageManager {
       return;
     }
     // if the Book was clicked and gotoPage is active then attempt to abort gotoPage:
-    if (autoFlipActive && !tearActive && pageCorner.x >= 0 && pageCorner.x <= spanWidth / 2 && event != null) {
+    if (autoFlipActive &&
+        !tearActive &&
+        pageCorner.x >= 0 &&
+        pageCorner.x <= spanWidth / 2 &&
+        event != null) {
       cancelGotoPage(false);
       return;
     }
     // stop if the clicked SuperViewStack does not show any Pages:
-    if (((!pageL.visible && side == Page.LEFT) || (!pageR.visible && side == Page.RIGHT)) &&
+    if (((!pageL.visible && side == Page.LEFT) ||
+            (!pageR.visible && side == Page.RIGHT)) &&
         _status != BookEvent.PAGEFLIP_STARTED &&
         _status != BookEvent.PAGEFLIP_ENDING &&
         _status != BookEvent.HOVER_STARTED &&
@@ -494,7 +499,9 @@ class DartBook extends PageManager {
       return;
     }
     // stop if none of the pagecorners are hit:
-    if (!isPageCornerHit() && (!sideFlip || !isPageSideHit()) && !autoFlipActive) {
+    if (!isPageCornerHit() &&
+        (!sideFlip || !isPageSideHit()) &&
+        !autoFlipActive) {
       return;
     }
     // don't flip if Page isn't allowed to:
@@ -503,17 +510,21 @@ class DartBook extends PageManager {
       return;
     }
     // stop if a page corner is flipping back into position
-    if ((_status == BookEvent.PAGEFLIP_ENDING || _status == BookEvent.HOVER_ENDING) &&
+    if ((_status == BookEvent.PAGEFLIP_ENDING ||
+            _status == BookEvent.HOVER_ENDING) &&
         !autoFlipActive &&
         !lastFlipSucceeded) {
       // switch back to flipping mode if the same page corner was picked up:
-      if (lastFlippedCorner == (getCurrentCorner()) && sideFlipActive == isPageSideHit()) {
+      if (lastFlippedCorner == (getCurrentCorner()) &&
+          sideFlipActive == isPageSideHit()) {
         if (Ac.MOBILE) {
           stage.addEventListener<InputEvent>(TouchEvent.TOUCH_END, endPageFlip);
         } else {
           stage.addEventListener<InputEvent>(MouseEvent.MOUSE_UP, endPageFlip);
         }
-        String newStatus = (hoverActive) ? BookEvent.HOVER_STARTED : BookEvent.PAGEFLIP_STARTED;
+        String newStatus = (hoverActive)
+            ? BookEvent.HOVER_STARTED
+            : BookEvent.PAGEFLIP_STARTED;
         setStatus(newStatus, true, oldPage);
       }
       return;
@@ -541,7 +552,8 @@ class DartBook extends PageManager {
 
     // set direction markers and position the render:
     if (autoFlipActive && !tearActive) lastFlippedCorner = new Point(side, 1);
-    if (autoFlipActive && tearActive) lastFlippedCorner = new Point(side, (tearFromTop) ? 0 : 1);
+    if (autoFlipActive && tearActive)
+      lastFlippedCorner = new Point(side, (tearFromTop) ? 0 : 1);
     if (!autoFlipActive) lastFlippedCorner = getCurrentCorner();
     lastFlippedSide = lastFlippedCorner.x.round();
     lastFlippedDirection = (side == Page.LEFT) ? -1 : 1;
@@ -571,7 +583,8 @@ class DartBook extends PageManager {
     }
 
     // set page corner markers:
-    pageCorner = new Point(lastFlippedCorner.x * spanWidth / 2, lastFlippedCorner.y * spanHeight);
+    pageCorner = new Point(
+        lastFlippedCorner.x * spanWidth / 2, lastFlippedCorner.y * spanHeight);
     if (autoFlipActive) {
       pageCornerTarget = pageCorner.clone();
     }
@@ -581,13 +594,15 @@ class DartBook extends PageManager {
 
     // set status:
     setStatus(
-        (hoverActive) ? BookEvent.HOVER_STARTED : BookEvent.PAGEFLIP_STARTED, false); // false = dispatch Event later
+        (hoverActive) ? BookEvent.HOVER_STARTED : BookEvent.PAGEFLIP_STARTED,
+        false); // false = dispatch Event later
 
     // add listeners:
     dragPageCorner();
     // addEventListener(Event.ENTER_FRAME, dragPageCorner);
 
-    _onEnterFrameDragSubscription = Ac.JUGGLER.onElapsedTimeChange.listen((e) => dragPageCorner());
+    _onEnterFrameDragSubscription =
+        Ac.JUGGLER.onElapsedTimeChange.listen((e) => dragPageCorner());
 
     if (Ac.MOBILE) {
       stage.addEventListener<InputEvent>(TouchEvent.TOUCH_END, endPageFlip);
@@ -624,7 +639,8 @@ class DartBook extends PageManager {
     }
 
     // create faux mouse to create easing:
-    if (_status == BookEvent.PAGEFLIP_STARTED || _status == BookEvent.HOVER_STARTED) {
+    if (_status == BookEvent.PAGEFLIP_STARTED ||
+        _status == BookEvent.HOVER_STARTED) {
       if (movePageCornerTarget() && autoFlipActive) {
         endPageFlip();
         return;
@@ -637,7 +653,8 @@ class DartBook extends PageManager {
 
     // check if the pageflip has ended:
     if (pageCorner == (pageCornerTarget) &&
-        (_status == BookEvent.PAGEFLIP_ENDING || _status == BookEvent.HOVER_ENDING)) {
+        (_status == BookEvent.PAGEFLIP_ENDING ||
+            _status == BookEvent.HOVER_ENDING)) {
       finishPageFlip();
       return;
     }
@@ -656,8 +673,14 @@ class DartBook extends PageManager {
     // perform pageflip:
     if (!front.explicitHard && !back.explicitHard) {
       Map<String, dynamic> ocf = PageFlip.computeFlip(
-          pageCorner.clone(), lastFlippedCorner.clone(), (spanWidth / 2).round(), spanHeight.round(), !tearActive, 1);
-      PageFlip.drawBitmapSheet(ocf, renderSprite, bitmapData[frontIndex], bitmapData[backIndex]);
+          pageCorner.clone(),
+          lastFlippedCorner.clone(),
+          (spanWidth / 2).round(),
+          spanHeight.round(),
+          !tearActive,
+          1);
+      PageFlip.drawBitmapSheet(
+          ocf, renderSprite, bitmapData[frontIndex], bitmapData[backIndex]);
 
       // add shadows or highlights to the render:
       addSmoothGradients(ocf);
@@ -682,7 +705,8 @@ class DartBook extends PageManager {
    */
   void endPageFlip([InputEvent event = null]) {
     // stop if the Book is not currently performing a pageflip:
-    if (_status != BookEvent.PAGEFLIP_STARTED && _status != BookEvent.HOVER_STARTED) {
+    if (_status != BookEvent.PAGEFLIP_STARTED &&
+        _status != BookEvent.HOVER_STARTED) {
       return;
     }
     // ignore mouse-up event if a Page is being torn out of the Book:
@@ -724,7 +748,9 @@ class DartBook extends PageManager {
     }
 
     // set status and dispatch event:
-    String newStatus = (_status == BookEvent.HOVER_STARTED) ? BookEvent.HOVER_ENDING : BookEvent.PAGEFLIP_ENDING;
+    String newStatus = (_status == BookEvent.HOVER_STARTED)
+        ? BookEvent.HOVER_ENDING
+        : BookEvent.PAGEFLIP_ENDING;
     Page page = (_pages[_currentPage + lastFlippedSide]);
     setStatus(newStatus, true, page);
   }
@@ -736,7 +762,8 @@ class DartBook extends PageManager {
    */
   void finishPageFlip() {
     // stop is endFlip() has not already been called:
-    if (_status != BookEvent.PAGEFLIP_ENDING && _status != BookEvent.HOVER_ENDING) {
+    if (_status != BookEvent.PAGEFLIP_ENDING &&
+        _status != BookEvent.HOVER_ENDING) {
       return;
     }
 
@@ -770,8 +797,8 @@ class DartBook extends PageManager {
     refreshViewStacks();
 
     // set status:
-    setStatus(
-        BookEvent.NOT_FLIPPING, true, page, (hoverActive) ? BookEvent.HOVER_FINISHED : BookEvent.PAGEFLIP_FINISHED);
+    setStatus(BookEvent.NOT_FLIPPING, true, page,
+        (hoverActive) ? BookEvent.HOVER_FINISHED : BookEvent.PAGEFLIP_FINISHED);
 
     // dispatch additional events:
     if (!hoverActive) {
@@ -779,11 +806,13 @@ class DartBook extends PageManager {
         if (lastFlipSucceeded) {
           dispatchEvent(new BookEvent(BookEvent.PAGE_TURNED, this, page));
           if ((lastFlippedSide == Page.RIGHT && _currentPage == 1) ||
-              (lastFlippedSide == Page.LEFT && _currentPage == _pages.length - 3)) {
+              (lastFlippedSide == Page.LEFT &&
+                  _currentPage == _pages.length - 3)) {
             dispatchEvent(new BookEvent(BookEvent.BOOK_OPENED, this));
           }
           if ((lastFlippedSide == Page.LEFT && _currentPage == -1) ||
-              (lastFlippedSide == Page.RIGHT && _currentPage == _pages.length - 1)) {
+              (lastFlippedSide == Page.RIGHT &&
+                  _currentPage == _pages.length - 1)) {
             dispatchEvent(new BookEvent(BookEvent.BOOK_CLOSED, this));
           }
         } else {
@@ -843,15 +872,24 @@ class DartBook extends PageManager {
     List<Point<num>> pPoints = [];
     pPoints.add(new Point((1 - lastFlippedSide) * spanWidth / 2, 0));
     pPoints.add(new Point(pPoints[0].x + w, 0 - closeness * hardPerspective));
-    pPoints.add(new Point(pPoints[0].x + w, spanHeight + closeness * hardPerspective));
+    pPoints.add(
+        new Point(pPoints[0].x + w, spanHeight + closeness * hardPerspective));
     pPoints.add(new Point((1 - lastFlippedSide) * spanWidth / 2, spanHeight));
 
     // make sure the first Point in the List is always the top-left, etc:
     List<Point<num>> p = [];
-    p.add((pPoints[0].x < pPoints[1].x) ? pPoints[0].clone() : pPoints[1].clone());
-    p.add((pPoints[0].x > pPoints[1].x) ? pPoints[0].clone() : pPoints[1].clone());
-    p.add((pPoints[2].x > pPoints[3].x) ? pPoints[2].clone() : pPoints[3].clone());
-    p.add((pPoints[2].x < pPoints[3].x) ? pPoints[2].clone() : pPoints[3].clone());
+    p.add((pPoints[0].x < pPoints[1].x)
+        ? pPoints[0].clone()
+        : pPoints[1].clone());
+    p.add((pPoints[0].x > pPoints[1].x)
+        ? pPoints[0].clone()
+        : pPoints[1].clone());
+    p.add((pPoints[2].x > pPoints[3].x)
+        ? pPoints[2].clone()
+        : pPoints[3].clone());
+    p.add((pPoints[2].x < pPoints[3].x)
+        ? pPoints[2].clone()
+        : pPoints[3].clone());
 
     // draw page:
     BitmapData bmd;
@@ -882,7 +920,8 @@ class DartBook extends PageManager {
     bool pageCornerHit = isPageCornerHit();
 
     // if the hovered ViewStack does not display any Pages:
-    if (((side == Page.LEFT && !pageL.visible) || (side == Page.RIGHT && !pageR.visible)) &&
+    if (((side == Page.LEFT && !pageL.visible) ||
+            (side == Page.RIGHT && !pageR.visible)) &&
         (!hoverActive || _status == BookEvent.HOVER_ENDING)) {
       return;
     }
@@ -893,7 +932,8 @@ class DartBook extends PageManager {
 
     // roll over:
     if ((pageCornerHit || (sideFlip && isPageSideHit())) &&
-        ((!hoverActive && _status == BookEvent.NOT_FLIPPING) || _status == BookEvent.HOVER_ENDING)) {
+        ((!hoverActive && _status == BookEvent.NOT_FLIPPING) ||
+            _status == BookEvent.HOVER_ENDING)) {
       startPageFlip(null, true);
     }
     // roll out:
@@ -1033,7 +1073,8 @@ class DartBook extends PageManager {
     page = getPage(page, true);
 
     // stop if we're not currently inactive or hovering:
-    if (_status != BookEvent.NOT_FLIPPING && _status != BookEvent.HOVER_STARTED) {
+    if (_status != BookEvent.NOT_FLIPPING &&
+        _status != BookEvent.HOVER_STARTED) {
       return;
     }
     // fail silently if the provided Page is not one of the currently visible Pages:
@@ -1074,7 +1115,9 @@ class DartBook extends PageManager {
     String tint;
     if (lastFlippedSide == Page.LEFT) {
       // if left-hand page was flipped
-      tint = (pageCornerTarget.x > spanWidth / 2) ? Gradients.DARK : Gradients.LIGHT;
+      tint = (pageCornerTarget.x > spanWidth / 2)
+          ? Gradients.DARK
+          : Gradients.LIGHT;
     } else {
       // if right-hand page was flipped
       tint = (pageCornerTarget.x < 0) ? Gradients.LIGHT : Gradients.DARK;
@@ -1105,11 +1148,13 @@ class DartBook extends PageManager {
 
     // determine rotation correction:
     num rotate;
-    if (lastFlippedCorner == (new Point(1, 0)) || lastFlippedCorner == (new Point(0, 1))) {
+    if (lastFlippedCorner == (new Point(1, 0)) ||
+        lastFlippedCorner == (new Point(0, 1))) {
       // if the upper right or lower left corner is being flipped and the Page isn't torn out of its Book, correct the angle with 45 degrees:
       rotate = (!tearActive) ? Gradients.ROTATE_HALF : Gradients.ROTATE_FULL;
     }
-    if (lastFlippedCorner == (new Point(0, 0)) || lastFlippedCorner == (new Point(1, 1))) {
+    if (lastFlippedCorner == (new Point(0, 0)) ||
+        lastFlippedCorner == (new Point(1, 1))) {
       // if the upper left or lower right corner is being flipped and the Page isn't torn out of its Book, correct the angle with minus 45 degrees:
       rotate = (!tearActive) ? Gradients.ROTATE_FULL : Gradients.ROTATE_HALF;
     }
@@ -1120,11 +1165,14 @@ class DartBook extends PageManager {
     num testval = 1; //PI / 180;
     // draw gradients:
     if (ocf["cPoints"] != null)
-      page.gradients.drawFlipside(renderSprite.graphics, ocf["cPoints"] as List<Point<num>>, tint1, rotate * testval);
+      page.gradients.drawFlipside(renderSprite.graphics,
+          ocf["cPoints"] as List<Point<num>>, tint1, rotate * testval);
     if (ocf["pPoints"] != null)
-      page.gradients.drawOutside(renderSprite.graphics, ocf["pPoints"] as List<Point<num>>, tint1, rotate * testval);
+      page.gradients.drawOutside(renderSprite.graphics,
+          ocf["pPoints"] as List<Point<num>>, tint1, rotate * testval);
     if (ocf["cPoints"] != null && !tearActive)
-      page.gradients.drawInside(renderSprite.graphics, ocf["cPoints"] as List<Point<num>>, tint2, rotate * testval);
+      page.gradients.drawInside(renderSprite.graphics,
+          ocf["cPoints"] as List<Point<num>>, tint2, rotate * testval);
   }
 
   // PAGEFLIP ASSISTANCE:
@@ -1147,7 +1195,9 @@ class DartBook extends PageManager {
     if (!autoFlipActive) {
       // calculate coordinates:
       x = Ac.MOBILE ? touchX : mouseX;
-      y = (!sideFlipActive) ? Ac.MOBILE ? touchY : mouseY : lastFlippedCorner.y * spanHeight;
+      y = (!sideFlipActive)
+          ? Ac.MOBILE ? touchY : mouseY
+          : lastFlippedCorner.y * spanHeight;
       // adjust x per position of render:
       if (lastFlippedSide == Page.RIGHT) {
         x -= (spanWidth / 2);
@@ -1171,12 +1221,15 @@ class DartBook extends PageManager {
     // if gotoPage is active then move the page corner target to the opposite corner:
     if (autoFlipActive) {
       // calculate coordinates:
-      x = (!tearActive) ? pageCornerTarget.x : lastFlippedSide * (spanWidth / 2);
+      x = (!tearActive)
+          ? pageCornerTarget.x
+          : lastFlippedSide * (spanWidth / 2);
       y = pageCornerTarget.y;
       Point opposite = new Point(0, 0);
       // if this is a normal auto-flip:
       if (!tearActive) {
-        opposite.x = lastFlippedSide * (spanWidth / 2) - spanWidth * lastFlippedDirection;
+        opposite.x = lastFlippedSide * (spanWidth / 2) -
+            spanWidth * lastFlippedDirection;
         if ((x - opposite.x).abs() >= autoFlipSpeed) {
           x += autoFlipSpeed * -lastFlippedDirection;
         } else {
@@ -1197,7 +1250,9 @@ class DartBook extends PageManager {
       // set position:
       pageCornerTarget = new Point(x, y);
       // return true if pageCornerTarget has reached the opposite corner of where it started:
-      if (pageCornerTarget == (pageCorner) && ((tearActive && y == opposite.y) || (!tearActive && x == opposite.x))) {
+      if (pageCornerTarget == (pageCorner) &&
+          ((tearActive && y == opposite.y) ||
+              (!tearActive && x == opposite.x))) {
         return true;
       }
     }
@@ -1221,8 +1276,11 @@ class DartBook extends PageManager {
     num diffY = target.y - corner.y;
 
     // apply easing if difference is substantial:
-    if (Point.distance(pageCorner, pageCornerTarget) > DartBook.MAX_EASING_DIFFERENCE &&
-        (!snap || (_status != BookEvent.PAGEFLIP_STARTED && _status != BookEvent.HOVER_STARTED))) {
+    if (Point.distance(pageCorner, pageCornerTarget) >
+            DartBook.MAX_EASING_DIFFERENCE &&
+        (!snap ||
+            (_status != BookEvent.PAGEFLIP_STARTED &&
+                _status != BookEvent.HOVER_STARTED))) {
       pageCorner.x += diffX * _easing;
       pageCorner.y += diffY * _easing;
     } else {
@@ -1230,7 +1288,9 @@ class DartBook extends PageManager {
     }
 
     // make sure pageCorner is within bounds so no weird animation will result:
-    if ((_status == BookEvent.PAGEFLIP_ENDING || _status == BookEvent.HOVER_ENDING) && !tearActive) {
+    if ((_status == BookEvent.PAGEFLIP_ENDING ||
+            _status == BookEvent.HOVER_ENDING) &&
+        !tearActive) {
       if (pageCorner.y < 0) pageCorner.y = 0;
       if (pageCorner.y > spanHeight) pageCorner.y = spanHeight;
     }
@@ -1328,7 +1388,8 @@ class DartBook extends PageManager {
       point = new Point(mouseX, mouseY);
     }
     // return value:
-    if (regions[0]["side"].containsPoint(point) || regions[1]["side"].containsPoint(point)) {
+    if (regions[0]["side"].containsPoint(point) ||
+        regions[1]["side"].containsPoint(point)) {
       return true;
     } else {
       return false;
@@ -1348,7 +1409,9 @@ class DartBook extends PageManager {
   int getCurrentSide() {
     int side;
     if (!autoFlipActive) {
-      side = (Ac.MOBILE ? touchX : mouseX) <= spanWidth / 2 ? Page.LEFT : Page.RIGHT;
+      side = (Ac.MOBILE ? touchX : mouseX) <= spanWidth / 2
+          ? Page.LEFT
+          : Page.RIGHT;
     } else {
       if (!tearActive) {
         side = (autoFlipIndex < _currentPage) ? Page.LEFT : Page.RIGHT;
@@ -1382,7 +1445,8 @@ class DartBook extends PageManager {
    *
    * @
    */
-  void setStatus(String newStatus, [bool dispatchEvent = true, Page page = null, String eventType = ""]) {
+  void setStatus(String newStatus,
+      [bool dispatchEvent = true, Page page = null, String eventType = ""]) {
     if (_status != newStatus) {
       _status = newStatus;
       this.dispatchEvent(new BookEvent(BookEvent.STATUS_CHANGED, this));
@@ -1408,7 +1472,8 @@ class DartBook extends PageManager {
    * @
    */
   num getPageCornerYFromX(num x, [num curve = DartBook.AUTO_FLIP_CURVE]) {
-    num middleX = lastFlippedSide * (spanWidth / 2) - (spanWidth / 2) * lastFlippedDirection;
+    num middleX = lastFlippedSide * (spanWidth / 2) -
+        (spanWidth / 2) * lastFlippedDirection;
     num progress = (middleX - x) / (spanWidth / 2).abs();
     num y;
     if (lastFlippedCorner.y == 0) {
@@ -1430,7 +1495,8 @@ class DartBook extends PageManager {
   bool get flipOnRelease {
     if (flipOnClick && !autoFlipActive) {
       return (/*getTimer()*/
-          (Ac.JUGGLER.elapsedTime * 1000) - lastFlippedTime <= DartBook.CLICK_INTERVAL);
+          (Ac.JUGGLER.elapsedTime * 1000) - lastFlippedTime <=
+              DartBook.CLICK_INTERVAL);
     } else {
       return false;
     }
@@ -1477,7 +1543,8 @@ class DartBook extends PageManager {
     // set value:
     _hardCover = value;
     // erase or draw fold gradient for first and last Pages:
-    if (StateManager.instance.getState(this) >= StateManager.CREATION_COMPLETE) {
+    if (StateManager.instance.getState(this) >=
+        StateManager.CREATION_COMPLETE) {
       (_pages[0]).refreshFoldGradient();
       (_pages[_pages.length - 1]).refreshFoldGradient();
     }
@@ -1501,7 +1568,8 @@ class DartBook extends PageManager {
     // add/remove listeners:
     if (_hoverEnabled) {
       //addEventListener(Event.ENTER_FRAME, evaluateHover);
-      _onEnterFrameHoverSubscription = Ac.JUGGLER.onElapsedTimeChange.listen((e) => evaluateHover());
+      _onEnterFrameHoverSubscription =
+          Ac.JUGGLER.onElapsedTimeChange.listen((e) => evaluateHover());
     } else {
       //removeEventListener(Event.ENTER_FRAME, evaluateHover);
       _onEnterFrameHoverSubscription.cancel();
@@ -1540,16 +1608,21 @@ class DartBook extends PageManager {
     regions[0]["BL"].top += spanHeight - regionSize;
     // specify regions for right-hand page:
     regions.add(new Map());
-    regions[1]["TL"] = new Rectangle(spanWidth / 2, 0, _regionSize, _regionSize);
-    regions[1]["TR"] = new Rectangle(spanWidth / 2, 0, _regionSize, _regionSize);
-    regions[1]["BR"] = new Rectangle(spanWidth / 2, 0, _regionSize, _regionSize);
-    regions[1]["BL"] = new Rectangle(spanWidth / 2, 0, _regionSize, _regionSize);
+    regions[1]["TL"] =
+        new Rectangle(spanWidth / 2, 0, _regionSize, _regionSize);
+    regions[1]["TR"] =
+        new Rectangle(spanWidth / 2, 0, _regionSize, _regionSize);
+    regions[1]["BR"] =
+        new Rectangle(spanWidth / 2, 0, _regionSize, _regionSize);
+    regions[1]["BL"] =
+        new Rectangle(spanWidth / 2, 0, _regionSize, _regionSize);
     regions[1]["TR"].left += spanWidth / 2 - regionSize;
     regions[1]["BR"].left += spanWidth / 2 - regionSize;
     regions[1]["BR"].top += spanHeight - regionSize;
     regions[1]["BL"].top += spanHeight - regionSize;
     // specify side-flip regions for both pages:
-    regions[0]["side"] = new Rectangle(0, (spanHeight - _regionSize) / 2, _regionSize / 2, _regionSize);
+    regions[0]["side"] = new Rectangle(
+        0, (spanHeight - _regionSize) / 2, _regionSize / 2, _regionSize);
     regions[1]["side"] = regions[0]["side"].clone();
     regions[0]["side"].left = spanWidth - _regionSize / 2;
   }

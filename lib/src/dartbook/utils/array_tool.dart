@@ -1,4 +1,4 @@
-part of dartbook;
+part of acanvas_dartbook;
 
 /**
  * Provides additional functionality for Lists.
@@ -40,7 +40,8 @@ class ListTool {
    *
    * @return	List with adjusted values
    */
-  static List<num> adjustValues(List<num> array, num value, [String operator = "*"]) {
+  static List<num> adjustValues(List<num> array, num value,
+      [String operator = "*"]) {
     List<num> newList = [];
 
     for (int i = 0; i < array.length; i++) {

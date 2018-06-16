@@ -1,4 +1,4 @@
-part of dartbook;
+part of acanvas_dartbook;
 
 class MdSamplePage extends Page {
   /**
@@ -9,7 +9,8 @@ class MdSamplePage extends Page {
   @override
   void init({Map<String, String> params: null}) {
     super.init();
-    AcGraphics.rectangle(0, 0, 450, 600, color: Color.White, sprite: this, clear: false);
+    AcGraphics.rectangle(0, 0, 450, 600,
+        color: Color.White, sprite: this, clear: false);
 
     /* Vertical Container */
     Wrap vbox = new Wrap(spacing: 20, reflow: false)
@@ -46,15 +47,22 @@ class MdSamplePage extends Page {
       ..spacing = 20
       ..inheritSpan = true;
 
-    MdButton plusOneButton1 = new MdButton("+1", width: 60, preset: MdButton.PRESET_GREY, fontSize: 16);
+    MdButton plusOneButton1 = new MdButton("+1",
+        width: 60, preset: MdButton.PRESET_GREY, fontSize: 16);
     hbox2.addChild(plusOneButton1);
 
-    MdButton plusOneButton2 =
-        new MdButton("+1", width: 60, preset: MdButton.PRESET_GREY, fontSize: 16, fontColor: MdColor.BLUE);
+    MdButton plusOneButton2 = new MdButton("+1",
+        width: 60,
+        preset: MdButton.PRESET_GREY,
+        fontSize: 16,
+        fontColor: MdColor.BLUE);
     hbox2.addChild(plusOneButton2);
 
-    MdButton plusOneButton3 =
-        new MdButton("+1", width: 60, preset: MdButton.PRESET_GREY, fontSize: 16, fontColor: MdColor.RED);
+    MdButton plusOneButton3 = new MdButton("+1",
+        width: 60,
+        preset: MdButton.PRESET_GREY,
+        fontSize: 16,
+        fontColor: MdColor.RED);
     hbox2.addChild(plusOneButton3);
 
     vbox.addChild(hbox2);
@@ -67,11 +75,15 @@ class MdSamplePage extends Page {
       ..inheritSpan = true;
 
     MdFab iconButton1 = new MdFab(MdIcon.black(MdIconSet.menu),
-        bgColor: MdColor.TRANSPARENT, rippleColor: MdColor.BLACK, shadow: false);
+        bgColor: MdColor.TRANSPARENT,
+        rippleColor: MdColor.BLACK,
+        shadow: false);
     hbox3.addChild(iconButton1);
 
     MdFab iconButton2 = new MdFab(MdIcon.black(MdIconSet.more_vert),
-        bgColor: MdColor.TRANSPARENT, rippleColor: MdColor.BLACK, shadow: false);
+        bgColor: MdColor.TRANSPARENT,
+        rippleColor: MdColor.BLACK,
+        shadow: false);
     hbox3.addChild(iconButton2);
 
     MdFab iconButton3 = new MdFab(MdIcon.black(MdIconSet.delete),
@@ -91,13 +103,16 @@ class MdSamplePage extends Page {
       ..spacing = 20
       ..inheritSpan = true;
 
-    MdFab roundButton1 = new MdFab(MdIcon.white(MdIconSet.add), bgColor: MdColor.RED);
+    MdFab roundButton1 =
+        new MdFab(MdIcon.white(MdIconSet.add), bgColor: MdColor.RED);
     hbox4.addChild(roundButton1);
 
-    MdFab roundButton2 = new MdFab(MdIcon.white(MdIconSet.mail), bgColor: MdColor.BLUE);
+    MdFab roundButton2 =
+        new MdFab(MdIcon.white(MdIconSet.mail), bgColor: MdColor.BLUE);
     hbox4.addChild(roundButton2);
 
-    MdFab roundButton3 = new MdFab(MdIcon.white(MdIconSet.create), bgColor: MdColor.GREEN);
+    MdFab roundButton3 =
+        new MdFab(MdIcon.white(MdIconSet.create), bgColor: MdColor.GREEN);
     hbox4.addChild(roundButton3);
 
     vbox.addChild(hbox4);
@@ -124,7 +139,8 @@ class MdSamplePage extends Page {
     list1.span(400, 400);
 */
 
-    MdMenu list2 = new MdMenu(testList, cell: new MdListCell(MdColor.BLUE), shadow: true);
+    MdMenu list2 =
+        new MdMenu(testList, cell: new MdListCell(MdColor.BLUE), shadow: true);
     //list.submitCallback = _onCellCommit;
     hbox5.addChild(list2);
     list2.span(400, 250);
@@ -141,9 +157,15 @@ class MdSamplePage extends Page {
     dialog.addContent(new MdText(
         "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam."));
     dialog.addButton(new MdButton("DECLINE",
-        preset: MdButton.PRESET_RED, fontColor: MdColor.GREY_DARK, width: 90, background: false));
-    dialog.addButton(
-        new MdButton("ACCEPT", preset: MdButton.PRESET_BLUE, fontColor: MdColor.BLUE, width: 90, background: false));
+        preset: MdButton.PRESET_RED,
+        fontColor: MdColor.GREY_DARK,
+        width: 90,
+        background: false));
+    dialog.addButton(new MdButton("ACCEPT",
+        preset: MdButton.PRESET_BLUE,
+        fontColor: MdColor.BLUE,
+        width: 90,
+        background: false));
     dialog.span(300, 240);
     hbox6.addChild(dialog);
 /*
@@ -177,7 +199,8 @@ class MdSamplePage extends Page {
    * @return	BitmapData
    */
   BitmapData getBitmapData({bool scale: false}) {
-    BitmapData bmd = new BitmapData(_width.round(), _height.round(), 0x00ffffff);
+    BitmapData bmd =
+        new BitmapData(_width.round(), _height.round(), 0x00ffffff);
     bmd.draw(this);
     return bmd;
   }

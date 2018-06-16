@@ -1,4 +1,4 @@
-part of dartbook;
+part of acanvas_dartbook;
 
 /**
  * Draws shadows and highlights for a Page.
@@ -149,13 +149,17 @@ class Gradients {
    * @see		Book#addGradients()
    *
    */
-  void drawFold(Graphics graphics, [String tint = Gradients.LIGHT, num rotate = Gradients.ROTATE_FULL]) {
+  void drawFold(Graphics graphics,
+      [String tint = Gradients.LIGHT, num rotate = Gradients.ROTATE_FULL]) {
     Map<String, List<num>> gradient = Gradients.FLIPSIDE[tint];
-    SuperRectangle area = new SuperRectangle(0, 0, this._page.book.spanWidth / 2, this._page.book.spanHeight);
+    SuperRectangle area = new SuperRectangle(
+        0, 0, this._page.book.spanWidth / 2, this._page.book.spanHeight);
 
     // define the points that the calculation will be based on:
-    Point point1 = (this._page.side == Page.LEFT) ? area.topRight : area.topLeft;
-    Point point2 = (this._page.side == Page.LEFT) ? area.bottomRight : area.bottomLeft;
+    Point point1 =
+        (this._page.side == Page.LEFT) ? area.topRight : area.topLeft;
+    Point point2 =
+        (this._page.side == Page.LEFT) ? area.bottomRight : area.bottomLeft;
 
     // create the model for the gradient:
     Matrix matrix = this.createNewMatrix(point1, point2, rotate);
@@ -163,8 +167,8 @@ class Gradients {
     // draw gradient:
     graphics.beginPath();
     graphics.rect(area.left, area.top, area.width, area.height);
-    GraphicsGradient g = AcGraphics.linearGraphicsGradient(
-        gradient["color"], gradient["alpha"], gradient["ratio"], matrix, point1, point2);
+    GraphicsGradient g = AcGraphics.linearGraphicsGradient(gradient["color"],
+        gradient["alpha"], gradient["ratio"], matrix, point1, point2);
     graphics.fillGradient(g);
     graphics.closePath();
   }
@@ -209,12 +213,14 @@ class Gradients {
       return;
     }
 
-    int color = (tint == Gradients.DARK) ? Gradients.DARKCOLOR : Gradients.LIGHTCOLOR;
+    int color =
+        (tint == Gradients.DARK) ? Gradients.DARKCOLOR : Gradients.LIGHTCOLOR;
 
     // calculate strength (of as opacity) the "color":
-    num strength = (this._page.book.spanWidth / 2 - (area[0].x - area[1].x).abs()) /
-        (this._page.book.spanWidth / 2) *
-        this._solidColorAlpha;
+    num strength =
+        (this._page.book.spanWidth / 2 - (area[0].x - area[1].x).abs()) /
+            (this._page.book.spanWidth / 2) *
+            this._solidColorAlpha;
 
     // draw "color":
     graphics.beginPath();
@@ -235,13 +241,17 @@ class Gradients {
     // define the points that the calculation will be based on:
     Point point1 = area[area.length - 2];
     Point point2 = area[area.length - 1];
-    Point point3 = new Point((this._page.book.spanWidth / 2) * this._page.book.getLastFlippedCorner().x,
+    Point point3 = new Point(
+        (this._page.book.spanWidth / 2) *
+            this._page.book.getLastFlippedCorner().x,
         this._page.book.spanHeight * this._page.book.getLastFlippedCorner().y);
     Point point4 = area[0];
     List<Point<num>> newArea = [point1, point2];
 
     // adjust area (inside shadow is in a combination-area of the facing and flipping coordinates):
-    num x = (this._page.side == Page.LEFT) ? this._page.book.spanWidth : -this._page.book.spanWidth / 2;
+    num x = (this._page.side == Page.LEFT)
+        ? this._page.book.spanWidth
+        : -this._page.book.spanWidth / 2;
     num y = (point2.y == 0) ? 0 : this._page.book.spanHeight;
     newArea.add(new Point(x, y));
     y = (point2.y == 0) ? this._page.book.spanHeight : 0;
@@ -285,7 +295,8 @@ class Gradients {
 
       // calculate intersection (if both flipped corners are out of the bounds of the Book):
       if ((area[0].y < 0 && area[1].y < 0) ||
-          (area[0].y > this._page.book.spanHeight && area[1].y > this._page.book.spanHeight)) {
+          (area[0].y > this._page.book.spanHeight &&
+              area[1].y > this._page.book.spanHeight)) {
         int correctionIndex;
 
         if (this._page.book.lastFlippedSide == Page.LEFT) {
@@ -312,18 +323,26 @@ class Gradients {
         line = new Line(newArea[1], newArea[2]);
 
         if (line.a.y < 0 || line.b.y < 0) {
-          hLine.a = (line.a.y < line.b.y) ? newArea[newArea.length - 1] : newArea[newArea.length - 3];
-          hLine.b = (line.a.y < line.b.y) ? newArea[0] : newArea[newArea.length - 2];
+          hLine.a = (line.a.y < line.b.y)
+              ? newArea[newArea.length - 1]
+              : newArea[newArea.length - 3];
+          hLine.b =
+              (line.a.y < line.b.y) ? newArea[0] : newArea[newArea.length - 2];
         } else {
-          hLine.a = (line.a.y > line.b.y) ? newArea[newArea.length - 1] : newArea[newArea.length - 3];
-          hLine.b = (line.a.y > line.b.y) ? newArea[0] : newArea[newArea.length - 2];
+          hLine.a = (line.a.y > line.b.y)
+              ? newArea[newArea.length - 1]
+              : newArea[newArea.length - 3];
+          hLine.b =
+              (line.a.y > line.b.y) ? newArea[0] : newArea[newArea.length - 2];
         }
 
         if (line.a.y != hLine.a.y && line.b.y != hLine.a.y) {
           intersection = Line.getIntersection(line, hLine);
           int spliceAt;
-          if (newArea[1].y < 0 || newArea[1].y > this._page.book.spanHeight) spliceAt = 0;
-          if (newArea[2].y < 0 || newArea[2].y > this._page.book.spanHeight) spliceAt = newArea.length - 4;
+          if (newArea[1].y < 0 || newArea[1].y > this._page.book.spanHeight)
+            spliceAt = 0;
+          if (newArea[2].y < 0 || newArea[2].y > this._page.book.spanHeight)
+            spliceAt = newArea.length - 4;
           newArea.replaceRange(spliceAt, spliceAt + 2, [intersection]);
         }
       }
@@ -341,7 +360,8 @@ class Gradients {
 
     GraphicsGradient gr = AcGraphics.linearGraphicsGradient(
         gradient["color"],
-        ListTool.adjustValues(gradient["alpha"], strength, MathTool.MULTIPLICATION),
+        ListTool.adjustValues(
+            gradient["alpha"], strength, MathTool.MULTIPLICATION),
         gradient["ratio"],
         matrix,
         point1,
@@ -387,8 +407,10 @@ class Gradients {
     Map<String, List<num>> gradient0 = Gradients.OUTSIDE_HARD["dark"];
     Map<String, List<num>> gradient1 = Gradients.OUTSIDE_HARD["light"];
     // define the coordinates for the gradients:
-    Rectangle area0 = new Rectangle(0, 0, this._page.book.spanWidth / 2, this._page.book.spanHeight);
-    Rectangle area1 = new Rectangle(0, 0, this._page.book.spanWidth / 2, this._page.book.spanHeight);
+    Rectangle area0 = new Rectangle(
+        0, 0, this._page.book.spanWidth / 2, this._page.book.spanHeight);
+    Rectangle area1 = new Rectangle(
+        0, 0, this._page.book.spanWidth / 2, this._page.book.spanHeight);
     area0.left = area[0].x - this._page.book.spanWidth / 2;
     area0.right = min(area[0].x, area[1].x);
     area1.left = max(area[0].x, area[1].x);
@@ -396,13 +418,16 @@ class Gradients {
 
     // calculate strength of the gradients:
     num strength0 = 1 - (area[1].x - area0.left) / this._page.book.spanWidth;
-    num strength1 = max(0, (area[1].x - area[0].x) / (this._page.book.spanWidth / 2));
+    num strength1 =
+        max(0, (area[1].x - area[0].x) / (this._page.book.spanWidth / 2));
 
     // create the model for the gradients:
     Matrix matrix0 = new Matrix.fromIdentity();
     Matrix matrix1 = new Matrix.fromIdentity();
-    matrix0.createBox(this._page.book.spanWidth / 2, this._page.book.spanHeight, 0, area0.left, 0);
-    matrix1.createBox(this._page.book.spanWidth / 2, this._page.book.spanHeight, 0, area[0].x, 0);
+    matrix0.createBox(this._page.book.spanWidth / 2, this._page.book.spanHeight,
+        0, area0.left, 0);
+    matrix1.createBox(this._page.book.spanWidth / 2, this._page.book.spanHeight,
+        0, area[0].x, 0);
 
     // draw left gradient:
     if (strength0 > 0) {
@@ -410,7 +435,8 @@ class Gradients {
       graphics.rect(area0.left, area0.top, area0.width, area0.height);
       GraphicsGradient g = AcGraphics.linearGraphicsGradient(
           gradient0["color"],
-          ListTool.adjustValues(gradient0["alpha"], strength0, MathTool.MULTIPLICATION),
+          ListTool.adjustValues(
+              gradient0["alpha"], strength0, MathTool.MULTIPLICATION),
           gradient0["ratio"],
           matrix0,
           area0.topLeft,
@@ -425,7 +451,8 @@ class Gradients {
       graphics.rect(area1.left, area1.top, area1.width, area1.height);
       GraphicsGradient g = AcGraphics.linearGraphicsGradient(
           gradient1["color"],
-          ListTool.adjustValues(gradient1["alpha"], strength1, MathTool.MULTIPLICATION),
+          ListTool.adjustValues(
+              gradient1["alpha"], strength1, MathTool.MULTIPLICATION),
           gradient1["ratio"],
           matrix1,
           area1.topLeft,
@@ -451,15 +478,20 @@ class Gradients {
     if (!this._page.book.tearActive) {
       newArea = [point1, point2];
       if (newArea[0].y == 0 || newArea[1].y == 0) {
-        newArea.add(new Point(this._page.side * this._page.book.spanWidth / 2, 0));
+        newArea
+            .add(new Point(this._page.side * this._page.book.spanWidth / 2, 0));
       } else {
-        newArea.add(new Point(this._page.side * this._page.book.spanWidth / 2, this._page.book.spanHeight));
+        newArea.add(new Point(this._page.side * this._page.book.spanWidth / 2,
+            this._page.book.spanHeight));
       }
       if (area.length == 4) {
         int spliceAt = (newArea[1].y == 0) ? 0 : newArea.length - 1;
-        if (newArea[0].y == this._page.book.spanHeight || newArea[1].y == this._page.book.spanHeight) {
+        if (newArea[0].y == this._page.book.spanHeight ||
+            newArea[1].y == this._page.book.spanHeight) {
           newArea.insert(
-              spliceAt, new Point(this._page.side * this._page.book.spanWidth / 2, this._page.book.spanHeight));
+              spliceAt,
+              new Point(this._page.side * this._page.book.spanWidth / 2,
+                  this._page.book.spanHeight));
         }
       }
     }
@@ -494,7 +526,8 @@ class Gradients {
     DrawingTool.draw(graphics, newArea);
     GraphicsGradient g = AcGraphics.linearGraphicsGradient(
         gradient["color"],
-        ListTool.adjustValues(gradient["alpha"], strength, MathTool.MULTIPLICATION),
+        ListTool.adjustValues(
+            gradient["alpha"], strength, MathTool.MULTIPLICATION),
         gradient["ratio"],
         matrix,
         point1,
@@ -548,7 +581,8 @@ class Gradients {
     DrawingTool.draw(graphics, area);
     GraphicsGradient g = AcGraphics.linearGraphicsGradient(
         gradient["color"],
-        ListTool.adjustValues(gradient["alpha"], strength, MathTool.MULTIPLICATION),
+        ListTool.adjustValues(
+            gradient["alpha"], strength, MathTool.MULTIPLICATION),
         gradient["ratio"],
         matrix,
         point1,
@@ -575,7 +609,8 @@ class Gradients {
    *
    * @
    */
-  Matrix createNewMatrix(Point point1, Point point2, [num rotate = Gradients.ROTATE_FULL]) {
+  Matrix createNewMatrix(Point point1, Point point2,
+      [num rotate = Gradients.ROTATE_FULL]) {
     rotate *= pi * 2; // convert to radians
 
     // get offset and angle:
@@ -584,7 +619,8 @@ class Gradients {
 
     // define sizes:
     num larger = max(this._page.book.spanWidth / 2, this._page.book.spanHeight);
-    num smaller = min(this._page.book.spanWidth / 2, this._page.book.spanHeight);
+    num smaller =
+        min(this._page.book.spanWidth / 2, this._page.book.spanHeight);
     if (larger == this._page.book.spanHeight) {
       offset.x -= (larger - smaller) / 2;
     } else {
@@ -625,7 +661,8 @@ class Gradients {
    * @
    */
   Point getOffset(Point point1, Point point2) {
-    Point middle = new Point(this._page.book.spanWidth / 2 / 2, this._page.book.spanHeight / 2);
+    Point middle = new Point(
+        this._page.book.spanWidth / 2 / 2, this._page.book.spanHeight / 2);
     Point average = Point.interpolate(point1, point2, 0.5);
     Point offset = new Point(average.x - middle.x, average.y - middle.y);
     return offset;

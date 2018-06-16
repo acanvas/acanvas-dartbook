@@ -1,4 +1,4 @@
-part of dartbook;
+part of acanvas_dartbook;
 
 /**
  * Computes, generates, and draws a pageflip.
@@ -90,7 +90,8 @@ class PageFlip {
    * 				height:num - Sheet height.
    *
    */
-  static Map<String, dynamic> computeFlip(Point ptd, Point pt, int pw, int ph, bool ish, int sens) {
+  static Map<String, dynamic> computeFlip(
+      Point ptd, Point pt, int pw, int ph, bool ish, int sens) {
     // useful vars
     num dfx = ptd.x - pw * pt.x;
     num dfy = ptd.y - ph * pt.y;
@@ -127,9 +128,20 @@ class PageFlip {
 
     // default points array
     // cPoints -> the fliped part
-    List<Point<num>> cPoints = [new Point(0, 0), new Point(0, 0), new Point(0, 0), new Point(0, 0)];
+    List<Point<num>> cPoints = [
+      new Point(0, 0),
+      new Point(0, 0),
+      new Point(0, 0),
+      new Point(0, 0)
+    ];
     // pPoints -> the fixed part
-    List<Point<num>> pPoints = [new Point(0, 0), new Point(pw, 0), null, null, new Point(0, ph)];
+    List<Point<num>> pPoints = [
+      new Point(0, 0),
+      new Point(pw, 0),
+      null,
+      null,
+      new Point(0, ph)
+    ];
 
     // compute some flip
     flipDrag(ptd, spt, pw, ph);
@@ -164,7 +176,8 @@ class PageFlip {
     if (hyp > ph || hyp < 0) vhyp = ph;
 
     // second fliped point
-    cPoints[1] = new Point(cPoints[0].x + cos(-beta) * vhyp, cPoints[0].y + sin(-beta) * vhyp);
+    cPoints[1] = new Point(
+        cPoints[0].x + cos(-beta) * vhyp, cPoints[0].y + sin(-beta) * vhyp);
 
     // last fliped point
     cPoints[3] = new Point(cPoints[0].x + drx, pt2.y);
@@ -224,7 +237,13 @@ class PageFlip {
     if ((dfx).abs() < 1 && dfy.abs() < 1) cPoints = null;
 
     // now we just have to return all the stuff
-    return <String, dynamic>{"cPoints": cPoints, "pPoints": pPoints, "matrix": mat, "width": opw, "height": oph};
+    return <String, dynamic>{
+      "cPoints": cPoints,
+      "pPoints": pPoints,
+      "matrix": mat,
+      "width": opw,
+      "height": oph
+    };
   }
 
   /**
@@ -236,7 +255,8 @@ class PageFlip {
    * @param	bmp1		Second page bitmap (left-top aligned)
    *
    */
-  static void drawBitmapSheet(Map ocf, Sprite mc, BitmapData bmp0, BitmapData bmp1) {
+  static void drawBitmapSheet(
+      Map ocf, Sprite mc, BitmapData bmp0, BitmapData bmp1) {
     // affectations
     int nb;
     List<Point<num>> ppts = ocf["pPoints"] as List<Point<num>>;
@@ -247,7 +267,8 @@ class PageFlip {
     mc.graphics.beginPath();
     mc.graphics.moveTo(ppts[nb - 1].x, ppts[nb - 1].y);
     while (--nb >= 0) mc.graphics.lineTo(ppts[nb].x, ppts[nb].y);
-    mc.graphics.fillPattern(new GraphicsPattern.noRepeat(bmp0.renderTextureQuad, new Matrix.fromIdentity()));
+    mc.graphics.fillPattern(new GraphicsPattern.noRepeat(
+        bmp0.renderTextureQuad, new Matrix.fromIdentity()));
     mc.graphics.closePath();
 
     // draw the flipped part
@@ -257,7 +278,8 @@ class PageFlip {
     mc.graphics.beginPath();
     mc.graphics.moveTo(cpts[nb - 1].x, cpts[nb - 1].y);
     while (--nb >= 0) mc.graphics.lineTo(cpts[nb].x, cpts[nb].y);
-    mc.graphics.fillPattern(new GraphicsPattern.noRepeat(bmp1.renderTextureQuad, ocf["matrix"] as Matrix));
+    mc.graphics.fillPattern(new GraphicsPattern.noRepeat(
+        bmp1.renderTextureQuad, ocf["matrix"] as Matrix));
     mc.graphics.closePath();
   }
 
@@ -346,8 +368,8 @@ class PageFlip {
    * matric correction
    * @
    */
-  static void ordMatrix(Matrix mat, Point spt, num opw, num oph, bool ish, List<Point<num>> cPoints,
-      List<Point<num>> pPoint, num gama, num beta) {
+  static void ordMatrix(Matrix mat, Point spt, num opw, num oph, bool ish,
+      List<Point<num>> cPoints, List<Point<num>> pPoint, num gama, num beta) {
     if (spt.x == 1 && spt.y == 0) {
       mat.tx = cPoints[0].x;
       mat.ty = cPoints[0].y;

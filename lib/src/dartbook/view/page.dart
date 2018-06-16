@@ -1,4 +1,4 @@
-part of dartbook;
+part of acanvas_dartbook;
 
 /**
  * Dispatched when this Page its index changes (triggered by change in the pages property of the accompanying PageManager).
@@ -40,7 +40,10 @@ class Page extends LifecycleSprite {
   /**
    * @
    */
-  static final Map<String, num> DEFAULT_STYLES = {"backgroundColor": 0xFFFFFFFF, "backgroundAlpha": 0.3};
+  static final Map<String, num> DEFAULT_STYLES = {
+    "backgroundColor": 0xFFFFFFFF,
+    "backgroundAlpha": 0.3
+  };
 
   // internals accessors:
   /**
@@ -136,7 +139,8 @@ class Page extends LifecycleSprite {
 
   @override
   void dispose({bool removeSelf: true}) {
-    if (contains(bm)) removeChild(bm); // save BitmapData from being trashed in super call
+    if (contains(bm))
+      removeChild(bm); // save BitmapData from being trashed in super call
     _gradients = null;
 
     super.dispose(removeSelf: false);
@@ -156,7 +160,8 @@ class Page extends LifecycleSprite {
     num mScaleX = super.width / _width;
     num mScaleY = super.height / _height;
 
-    BitmapData bmd = new BitmapData(_width.round(), _height.round(), 0x00ffffff);
+    BitmapData bmd =
+        new BitmapData(_width.round(), _height.round(), 0x00ffffff);
     Matrix matrix = new Matrix.fromIdentity();
     if (scale) matrix.scale(mScaleX, mScaleY);
     bmd.draw(this, matrix);
@@ -168,7 +173,8 @@ class Page extends LifecycleSprite {
    */
   void drawFoldGradient() {
     String tint = (side == Page.LEFT) ? Gradients.LIGHT : Gradients.DARK;
-    num rotate = (side == Page.LEFT) ? Gradients.ROTATE_FULL : Gradients.ROTATE_HALF;
+    num rotate =
+        (side == Page.LEFT) ? Gradients.ROTATE_FULL : Gradients.ROTATE_HALF;
     clearFoldGradient();
     _gradients.drawFold(_shape.graphics, tint, rotate);
   }
@@ -273,7 +279,8 @@ class Page extends LifecycleSprite {
     if (_book == null) {
       return false;
     }
-    return (_book.pages.length > 0 && this == _book.pages[_book.pages.length - 1]);
+    return (_book.pages.length > 0 &&
+        this == _book.pages[_book.pages.length - 1]);
   }
 
   /**
@@ -315,7 +322,8 @@ class Page extends LifecycleSprite {
    */
   void setBook(PageManager value) {
     if (value == null) {
-      _book.removeEventListener<BookEvent>(BookEvent.CONTENT_CHANGED, changeIndex);
+      _book.removeEventListener<BookEvent>(
+          BookEvent.CONTENT_CHANGED, changeIndex);
       _book = null;
     } else if (_book != value && value is DartBook) {
       _book = (value);
@@ -421,7 +429,8 @@ class Page extends LifecycleSprite {
    * @see		Page#explicitTearable
    */
   bool get tearable {
-    return (!hard && (explicitTearable || getFlipSide().explicitTearable || _book.tearable));
+    return (!hard &&
+        (explicitTearable || getFlipSide().explicitTearable || _book.tearable));
   }
 
   void set tearable(bool value) {

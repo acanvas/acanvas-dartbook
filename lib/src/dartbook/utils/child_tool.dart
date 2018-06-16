@@ -1,4 +1,4 @@
-part of dartbook;
+part of acanvas_dartbook;
 
 /**
  * All-static class that provides additional functionality for adding and removing children to and from Containers.
@@ -48,7 +48,8 @@ class ChildTool {
    * @param	index		Index at which to add child to container.
    *
    */
-  static void moveChild(DisplayObject child, DisplayObjectContainer container, [int index = -1]) {
+  static void moveChild(DisplayObject child, DisplayObjectContainer container,
+      [int index = -1]) {
     // remove child from old parent:
     child.parent.removeChild(child);
     // add child to new parent:

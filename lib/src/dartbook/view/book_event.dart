@@ -1,4 +1,4 @@
-part of dartbook;
+part of acanvas_dartbook;
 
 /**
  * Event class specifying type property values for Events broadcasted by the Book class.
@@ -136,7 +136,8 @@ class BookEvent extends Event {
    * @param	cancelable	Determines whether the BookEvent object can be canceled.
    *
    */
-  BookEvent(String type, PageManager book, [Page page = null, bool bubbles = false, bool cancelable = false])
+  BookEvent(String type, PageManager book,
+      [Page page = null, bool bubbles = false, bool cancelable = false])
       : super(type, bubbles /*, cancelable*/) {
     this._pageManager = book;
     this._page = page;

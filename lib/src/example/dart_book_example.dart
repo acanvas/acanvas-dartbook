@@ -1,4 +1,4 @@
-part of dartbook;
+part of acanvas_dartbook;
 
 Stage stage;
 DartBook book;
@@ -9,13 +9,15 @@ class DartBookExample {
     opts.renderEngine = RenderEngine.Canvas2D;
     opts.backgroundColor = 0xFFf9f9f9;
     opts.stageAlign = StageAlign.TOP_LEFT;
-    opts.inputEventMode = Ac.MOBILE ? InputEventMode.TouchOnly : InputEventMode.MouseOnly;
+    opts.inputEventMode =
+        Ac.MOBILE ? InputEventMode.TouchOnly : InputEventMode.MouseOnly;
     opts.preventDefaultOnTouch = true;
     opts.preventDefaultOnWheel = true;
     opts.preventDefaultOnKeyboard = false;
     //opts.maxPixelRatio = 1.0;
 
-    stage = new Stage(html.querySelector('#stage') as html.CanvasElement, width: 840, height: 660, options: opts);
+    stage = new Stage(html.querySelector('#stage') as html.CanvasElement,
+        width: 840, height: 660, options: opts);
 
     Ac.STAGE = stage;
     new RenderLoop()..addStage(stage);
@@ -79,8 +81,10 @@ class DartBookExample {
 
   */
 
-    book.addEventListener<LifecycleEvent>(LifecycleEvent.INIT_COMPLETE, onBookInit);
-    book.addEventListener<BookEvent>(BookEvent.STATUS_CHANGED, onBookStatusChange);
+    book.addEventListener<LifecycleEvent>(
+        LifecycleEvent.INIT_COMPLETE, onBookInit);
+    book.addEventListener<BookEvent>(
+        BookEvent.STATUS_CHANGED, onBookStatusChange);
     book.addEventListener<BookEvent>(BookEvent.PAGE_TURNED, onBookPageTurned);
     book.init();
   }
@@ -112,7 +116,8 @@ class DartBookExample {
 
 //SUPER EXPERIMENTAL: remove unneeded pages to save CPU/memory
   void onBookPageTurned(BookEvent event) {
-    print("onBookPageTurned: new left page: ${book.currentPage},  old page: ${event.page.index}");
+    print(
+        "onBookPageTurned: new left page: ${book.currentPage},  old page: ${event.page.index}");
 
     int renderBefore = 2;
     int renderAfter = 3;
@@ -137,7 +142,8 @@ class DartBookExample {
       page = book.getPage(i);
 
       // filter for page range to render around index of current left page (X pages before, right page of current page, next Y pages)
-      if (book.currentPage - renderBefore <= i && i <= book.currentPage + renderAfter) {
+      if (book.currentPage - renderBefore <= i &&
+          i <= book.currentPage + renderAfter) {
         _initPage(page);
 
         //filter for current page and the page next to it

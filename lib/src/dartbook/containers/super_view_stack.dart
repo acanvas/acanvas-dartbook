@@ -1,4 +1,4 @@
-part of dartbook;
+part of acanvas_dartbook;
 
 /**
  * SuperViewStack in many ways behaves like the classic ViewStack.
@@ -349,7 +349,8 @@ class SuperViewStack extends BoxSprite {
    */
   void resizeFade(Sprite child) {
     // point out the Sprite:
-    Sprite shape = child.getChildByName(SuperViewStack.FADESHAPE_NAME) as Sprite;
+    Sprite shape =
+        child.getChildByName(SuperViewStack.FADESHAPE_NAME) as Sprite;
 
     if (shape == null) return;
 
@@ -383,7 +384,8 @@ class SuperViewStack extends BoxSprite {
       if (i != this._selectedIndex) {
         shape.graphics.beginPath();
         shape.graphics.rect(0, 0, 100, 100);
-        shape.graphics.fillColor(((this._fade * 255).round() << 24) + this._fadeColor);
+        shape.graphics
+            .fillColor(((this._fade * 255).round() << 24) + this._fadeColor);
         shape.graphics.closePath();
       }
     }
@@ -526,7 +528,8 @@ class SuperViewStack extends BoxSprite {
   }
 
   void set behavior(String value) {
-    if (value == this.behavior || (value != SuperViewStack.SUPER && value != SuperViewStack.NORMAL)) {
+    if (value == this.behavior ||
+        (value != SuperViewStack.SUPER && value != SuperViewStack.NORMAL)) {
       return;
     }
     this.__fade = this.__fade.reversed.toList();

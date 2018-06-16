@@ -1,4 +1,4 @@
-part of dartbook;
+part of acanvas_dartbook;
 
 /**
  * Provides functionality for working with Rectangles. This class extends the RoundedRectangle class and thus has all of its functionality (and also the functionality of the Rectangle class, which RoundedRectangle extends).
@@ -32,7 +32,12 @@ class SuperRectangle extends Rectangle {
    */
   num _cornerRadius;
 
-  SuperRectangle([num x = 0, num y = 0, num width = 0, num height = 0, num cornerRadius = 0])
+  SuperRectangle(
+      [num x = 0,
+      num y = 0,
+      num width = 0,
+      num height = 0,
+      num cornerRadius = 0])
       : super(x, y, width, height) {
     _cornerRadius = cornerRadius;
   }
@@ -48,7 +53,8 @@ class SuperRectangle extends Rectangle {
     if (rect is SuperRectangle) {
       return rect;
     }
-    SuperRectangle newRect = new SuperRectangle(rect.left, rect.top, rect.width, rect.height);
+    SuperRectangle newRect =
+        new SuperRectangle(rect.left, rect.top, rect.width, rect.height);
 //			if (rect is RoundedRectangle){
 //				newRect.cornerRadius = RoundedRectangle(rect).cornerRadius;
 //			}

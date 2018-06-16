@@ -1,4 +1,4 @@
-part of dartbook;
+part of acanvas_dartbook;
 
 class BookSampleAssets {
   static const int NUM_PAGES = 20;
@@ -40,6 +40,8 @@ class BookSampleAssets {
   }
 
   static Bitmap getBackgroundOfPage(int i) {
-    return new Bitmap(_singleton.mgr.getBitmapData("" + (i < 10 ? "0$i" : "$i") + "").clone());
+    return new Bitmap(_singleton.mgr
+        .getBitmapData("" + (i < 10 ? "0$i" : "$i") + "")
+        .clone());
   }
 }

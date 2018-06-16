@@ -1,4 +1,4 @@
-part of dartbook;
+part of acanvas_dartbook;
 
 /**
  * All-static class providing functionality for making basic geometric calculations.
@@ -151,9 +151,13 @@ class Geom {
    * @return	true if point is in the specified corner of rect.
    *
    */
-  static bool isPointInCorner(Rectangle rect, Point point, String corner, [bool triangular = true]) {
+  static bool isPointInCorner(Rectangle rect, Point point, String corner,
+      [bool triangular = true]) {
     // if the value of the corner parameter is invalid, return false:
-    if (corner != Geom.BL && corner != Geom.BR && corner != Geom.TL && corner != Geom.TR) {
+    if (corner != Geom.BL &&
+        corner != Geom.BR &&
+        corner != Geom.TL &&
+        corner != Geom.TR) {
       return false;
     }
     // if the Rectangle does not contain Point at all, return false:
@@ -174,7 +178,8 @@ class Geom {
         if (corner == Geom.TR) value = true;
       }
       // if we're working with an imaginary seperation-line going from top-left to bottom-right:
-      if (rect.width - (relativeMouse.y * (rect.width / rect.height)) > relativeMouse.x) {
+      if (rect.width - (relativeMouse.y * (rect.width / rect.height)) >
+          relativeMouse.x) {
         if (corner == Geom.TL) value = true;
         if (corner == Geom.BR) value = false;
       } else {
@@ -186,10 +191,14 @@ class Geom {
     } else {
       // create inner Rectangle describing the value of the corner parameter provided:
       Rectangle innerRect = rect.clone();
-      if (corner == Geom.TR || corner == Geom.BR) innerRect.left = rect.left + rect.width / 2;
-      if (corner == Geom.TL || corner == Geom.BL) innerRect.width = rect.width / 2;
-      if (corner == Geom.TR || corner == Geom.TL) innerRect.height = rect.height / 2;
-      if (corner == Geom.BR || corner == Geom.BR) innerRect.top = rect.left + rect.height / 2;
+      if (corner == Geom.TR || corner == Geom.BR)
+        innerRect.left = rect.left + rect.width / 2;
+      if (corner == Geom.TL || corner == Geom.BL)
+        innerRect.width = rect.width / 2;
+      if (corner == Geom.TR || corner == Geom.TL)
+        innerRect.height = rect.height / 2;
+      if (corner == Geom.BR || corner == Geom.BR)
+        innerRect.top = rect.left + rect.height / 2;
       // return value:
       return innerRect.containsPoint(point);
     }
@@ -215,7 +224,8 @@ class Geom {
    *
    * @return	List
    */
-  static List getRectIntersections(Line line, Rectangle rect, [bool includeNull = false]) {
+  static List getRectIntersections(Line line, Rectangle rect,
+      [bool includeNull = false]) {
     List<Point> intersections = [];
     List<Line> lines = SuperRectangle.createSuperRectangle(rect).getLines();
     Point intersection;
@@ -242,7 +252,9 @@ class Geom {
       if (area[i] == null || !(area[i] is Point)) {
         continue;
       }
-      if (nearest == -1 || Point.distance(area[i], point) < Point.distance(area[nearest], point)) {
+      if (nearest == -1 ||
+          Point.distance(area[i], point) <
+              Point.distance(area[nearest], point)) {
         nearest = i;
       }
     }
@@ -259,13 +271,16 @@ class Geom {
    *
    * @returns	List of Points.
    */
-  static List star(num radius, Point center, [num rotation = 0, int points = 5]) {
+  static List star(num radius, Point center,
+      [num rotation = 0, int points = 5]) {
     List<Point> area = [];
     num angle = (pi * 2) / (points * 2);
     rotation -= pi / 2;
     for (int i = 0; i < points; i++) {
-      area.add(Geom.getPointFromAngle(center, rotation + angle * (i * 2), radius));
-      area.add(Geom.getPointFromAngle(center, rotation + angle * (i * 2 + 1), radius / 2));
+      area.add(
+          Geom.getPointFromAngle(center, rotation + angle * (i * 2), radius));
+      area.add(Geom.getPointFromAngle(
+          center, rotation + angle * (i * 2 + 1), radius / 2));
     }
     return area;
   }

@@ -1,4 +1,4 @@
-part of dartbook;
+part of acanvas_dartbook;
 
 /**
  * Tesselates an area into several triangles to allow free transform distortion on BitmapData objects.
@@ -113,8 +113,16 @@ class DistortImage {
     // create triangles:
     for (ix = 0; ix < _vseg + 1; ix++) {
       for (iy = 0; iy < _hseg + 1; iy++) {
-        _tri.add([_p[iy + ix * (_hseg + 2)], _p[iy + ix * (_hseg + 2) + 1], _p[iy + (ix + 1) * (_hseg + 2)]]);
-        _tri.add([_p[iy + (ix + 1) * (_hseg + 2) + 1], _p[iy + (ix + 1) * (_hseg + 2)], _p[iy + ix * (_hseg + 2) + 1]]);
+        _tri.add([
+          _p[iy + ix * (_hseg + 2)],
+          _p[iy + ix * (_hseg + 2) + 1],
+          _p[iy + (ix + 1) * (_hseg + 2)]
+        ]);
+        _tri.add([
+          _p[iy + (ix + 1) * (_hseg + 2) + 1],
+          _p[iy + (ix + 1) * (_hseg + 2)],
+          _p[iy + ix * (_hseg + 2) + 1]
+        ]);
       }
     }
   }
@@ -130,7 +138,8 @@ class DistortImage {
    * @param	bl			Point specifying the coordinates of the bottom-left corner of the distortion
    *
    */
-  void setTransform(Graphics graphics, BitmapData bmd, Point tl, Point tr, Point br, Point bl) {
+  void setTransform(Graphics graphics, BitmapData bmd, Point tl, Point tr,
+      Point br, Point bl) {
     //TODO some x value seems wrong and disturb height calc in setTransform
 
 /*
@@ -230,7 +239,8 @@ class DistortImage {
       */
 
       //graphics.fillPattern(new GraphicsPattern.noRepeat(new BitmapData(450, 600, 0x55FF0000).renderTextureQuad, _tMat /*smoothing*/));
-      var pat = new GraphicsPattern.noRepeat(bmd.renderTextureQuad, /*l == 0 ? _spcMat : */ _tMat /*smoothing*/);
+      var pat = new GraphicsPattern.noRepeat(
+          bmd.renderTextureQuad, /*l == 0 ? _spcMat : */ _tMat /*smoothing*/);
       graphics.fillPattern(pat);
     }
   }

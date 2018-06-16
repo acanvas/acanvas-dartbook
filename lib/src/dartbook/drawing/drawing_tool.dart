@@ -1,4 +1,4 @@
-part of dartbook;
+part of acanvas_dartbook;
 
 /**
  * Provides basic functionality for drawing with the Drawing API.
@@ -67,10 +67,14 @@ class DrawingTool {
             lineStyle.applyTo(graphics);
           }
           graphics.moveTo(point.x + size / 2, point.y);
-          graphics.quadraticCurveTo(point.x + size / 2, point.y + size / 2, point.x, point.y + size / 2);
-          graphics.quadraticCurveTo(point.x - size / 2, point.y + size / 2, point.x - size / 2, point.y);
-          graphics.quadraticCurveTo(point.x - size / 2, point.y - size / 2, point.x, point.y - size / 2);
-          graphics.quadraticCurveTo(point.x + size / 2, point.y - size / 2, point.x + size / 2, point.y);
+          graphics.quadraticCurveTo(point.x + size / 2, point.y + size / 2,
+              point.x, point.y + size / 2);
+          graphics.quadraticCurveTo(point.x - size / 2, point.y + size / 2,
+              point.x - size / 2, point.y);
+          graphics.quadraticCurveTo(point.x - size / 2, point.y - size / 2,
+              point.x, point.y - size / 2);
+          graphics.quadraticCurveTo(point.x + size / 2, point.y - size / 2,
+              point.x + size / 2, point.y);
           break;
       }
     }
@@ -108,7 +112,8 @@ class DrawingTool {
    * @see		LineStyle
    *
    */
-  static void draw(Graphics graphics, List<Point> area, [bool connect = true, LineStyle lineStyle = null]) {
+  static void draw(Graphics graphics, List<Point> area,
+      [bool connect = true, LineStyle lineStyle = null]) {
     int i;
     List<Point> newArea = [];
     for (i = 0; i < area.length; i++) {
@@ -126,7 +131,8 @@ class DrawingTool {
       }
     }
     if (connect == true) {
-      drawLine(graphics, newArea[newArea.length - 1], newArea[0], lineStyle, false);
+      drawLine(
+          graphics, newArea[newArea.length - 1], newArea[0], lineStyle, false);
     }
   }
 
@@ -142,7 +148,8 @@ class DrawingTool {
    * @see		LineStyle
    * @see		DrawingTool#draw()
    */
-  static void rect(Graphics graphics, Rectangle rect, [LineStyle lineStyle = null]) {
+  static void rect(Graphics graphics, Rectangle rect,
+      [LineStyle lineStyle = null]) {
     List<Point> area = [
       rect.topLeft,
       new Point(rect.right, rect.top),
@@ -177,17 +184,23 @@ class DrawingTool {
       num traveled = 0;
       Point next;
 
-      for (int i = 0; i < (distance / (lineStyle.dash + lineStyle.space)).ceil(); i++) {
+      for (int i = 0;
+          i < (distance / (lineStyle.dash + lineStyle.space)).ceil();
+          i++) {
         traveled = i * (lineStyle.dash + lineStyle.space);
         // draw line:
-        traveled = (traveled + lineStyle.dash >= distance) ? distance : traveled + lineStyle.dash;
+        traveled = (traveled + lineStyle.dash >= distance)
+            ? distance
+            : traveled + lineStyle.dash;
         next = Point.interpolate(point1, point2, 1 - (traveled / distance));
 //					lineStyle.applyTo(graphics);
         graphics.lineTo(next.x, next.y);
         // stop if end of dash is equal to end of line:
         if (next == (point2)) break;
         // draw space:
-        traveled = (traveled + lineStyle.space >= distance) ? distance : traveled + lineStyle.space;
+        traveled = (traveled + lineStyle.space >= distance)
+            ? distance
+            : traveled + lineStyle.space;
         next = Point.interpolate(point1, point2, 1 - (traveled / distance));
         clearLineStyle(graphics);
         graphics.lineTo(next.x, next.y);

@@ -1,4 +1,4 @@
-name: dartbook
+name: acanvas_dartbook
 version: 0.1.1-dev
 description: The infamous Flex book component in pure Dart.
 environment:
@@ -9,7 +9,7 @@ dependencies:
   acanvas_commons:
     git: https://github.com/acanvas/acanvas-commons
 dev_dependencies:
-  #-------- Dart 2.0.0-dev.54 --------
+  #-------- Dart 2.0.0-dev --------
   build_runner: '>=0.8.8'
   build_test: '>=0.10.2'
   build_web_compilers: '>=0.4.0'

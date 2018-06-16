@@ -1,4 +1,4 @@
-library dartbook;
+library acanvas_dartbook;
 
 import 'dart:async' show StreamSubscription;
 import 'dart:math' hide Point, Rectangle;

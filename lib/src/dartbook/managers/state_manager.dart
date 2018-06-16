@@ -1,4 +1,4 @@
-part of dartbook;
+part of acanvas_dartbook;
 
 /**
  * Type that enables you to keep track of which state (creationComplete, childrenCreated, etc.) a certain component is in. Note that StateManager is a singleton class.
@@ -37,7 +37,13 @@ class StateManager {
   /**
    * @
    */
-  static final List<int> STATES = [BABY, PREINITIALIZE, INITIALIZE, CREATION_COMPLETE, UPDATE_COMPLETE];
+  static final List<int> STATES = [
+    BABY,
+    PREINITIALIZE,
+    INITIALIZE,
+    CREATION_COMPLETE,
+    UPDATE_COMPLETE
+  ];
 
   /**
    * Indicates that a component has not reached the first state yet.
@@ -98,9 +104,11 @@ class StateManager {
     this._items.add(item);
     this._states.add(StateManager.BABY);
     // add eventlisteners:
-    item.addEventListener<LifecycleEvent>(LifecycleEvent.INIT_COMPLETE, this.updateState);
+    item.addEventListener<LifecycleEvent>(
+        LifecycleEvent.INIT_COMPLETE, this.updateState);
     //item.addEventListener(LifecycleEvent.INIT_START, this.updateState);
-    item.addEventListener<LifecycleEvent>(LifecycleEvent.LOAD_COMPLETE, this.updateState);
+    item.addEventListener<LifecycleEvent>(
+        LifecycleEvent.LOAD_COMPLETE, this.updateState);
   }
 
   /**
@@ -109,7 +117,8 @@ class StateManager {
    * @
    */
   void updateState([Event event = null]) {
-    BoxSprite item = this._items[this._items.indexOf(event.target as BoxSprite)];
+    BoxSprite item =
+        this._items[this._items.indexOf(event.target as BoxSprite)];
     // set state in List:
     switch (event.type) {
       case LifecycleEvent.INIT_COMPLETE:

@@ -1,4 +1,4 @@
-part of dartbook;
+part of acanvas_dartbook;
 
 /**
  * Stores line-styles.
@@ -183,7 +183,9 @@ class LineStyle {
   }
 
   void set joints(JointStyle value) {
-    if (value == JointStyle.BEVEL || value == JointStyle.MITER || value == JointStyle.ROUND) {
+    if (value == JointStyle.BEVEL ||
+        value == JointStyle.MITER ||
+        value == JointStyle.ROUND) {
       this._joints = value;
     }
   }
@@ -217,7 +219,8 @@ class LineStyle {
    *
    */
   void applyTo(Graphics graphics) {
-    graphics.strokeColor(((this.alpha * 256).round() << 24) + this.color, this.thickness, this.joints, this.caps);
+    graphics.strokeColor(((this.alpha * 256).round() << 24) + this.color,
+        this.thickness, this.joints, this.caps);
 
     /*graphics.lineStyle (this.thickness,
 								this.color, 

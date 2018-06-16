@@ -1,4 +1,4 @@
-part of dartbook;
+part of acanvas_dartbook;
 
 /**
  * Error class specifying exceptions for certain situations that may occur when working with the Book class.
@@ -33,7 +33,8 @@ class BookError extends StateError {
    * Due to the lack of covariance in Actionscript overriding methods need to have the exact same signiature as the super-class' method.
    * Methods like PageManager's addChild, however, need to prohibit non-Page instances from being added to the container, this is accomplish by throwing a BookError in the case of a non-Page instance being passed as a parameter.
    */
-  static final String CHILD_NOT_PAGE = "Non-Page instances not allowed as children.";
+  static final String CHILD_NOT_PAGE =
+      "Non-Page instances not allowed as children.";
 
   /**
    * Error message indicating that a Page and a Book are not associated with eachother.
