@@ -1,8 +1,8 @@
-# DartBook
+# Acanvas Dartbook
 
-An awesome Page Flip component ported from ActionScript to pure Dart.
+Page Flip Book component ported from Flex to ActionScript to Dart.
 
-Demo: <http://rockdot.sounddesignz.com/dartbook> 
+Demo: <http://acanvas.sounddesignz.com/acanvas-dartbook> 
 
 - Original Author: Ruben Swieringa
 - Original Release Notes: <http://www.rubenswieringa.com/blog/flex-book-component-beta>
@@ -10,8 +10,9 @@ Demo: <http://rockdot.sounddesignz.com/dartbook>
 
 ## Features
 
-- Pageflip effect (not kidding ;-))
-- Runs in any browser, on any device!
+- Pageflip effect (Captain Obvious)
+- Runs in any browser, on any device.
+- File size just 76KB gzipped.
 - Hardback option for every page, as well as a hardcover option for the containing book, automatically making the first and last pages hardback.
 - Functionality for tearing pages out of the containing book.
 - Methods allowing automatically flipping through the pages of a book ( gotopage() ).
@@ -22,16 +23,18 @@ Demo: <http://rockdot.sounddesignz.com/dartbook>
 - Live-bitmapping functionality for playing animation uninterrupted during pageflips.
 - Locking functionality to keep certain pages from being flipped.
 
+
 ## Known Issues
 
-- Tiny animation flaw when flipping the pages backwards via tap/click
-- Hard pages not correctly distorting at the bottom due to an issue with StageXL bitmapfill position data
-- _ignore_cast_failures_ is still mandatory (see build.yaml) due to StageXL event engine not being ready for Dart 2 type system, yet
+- Partial animation glitch when flipping the pages backwards via tap/click
+- Hard pages distorting at the bottom due to an issue with StageXL bitmapfill position data
+- Scaling and touch behaviour suboptimal on some mobile devices
+
 
 ## Credits
 
 - The Dart team
-For making (and driving!) an awesome language and JS transpiler
+For a great language and JS transpiler
 - Bernhard Pichler
 For creating the StageXL Dart package, which provides the same display list API you may have used in Flash for many years.
 Site <https://github.com/bp74/StageXL/>
@@ -53,11 +56,12 @@ Site: <http://labs.flexcoders.nl>
 For letting Ruben Swieringa use his artwork in the Book demo.
 Site: <http://www.sumeco.net>
 
+
 ## History
 
 DartBook is a pretty direct port of FlexBook, and came to life like this:
 
-1. Porting FlexBook from Flex to pure ActionScript (sounds easier than one might think)
-2. Writing [ActionScript2Dart Converter](https://github.com/block-forest/stagexl-converter-pubglobal) a.k.a T-RegExp (it's easier than one might think though) and run the result of \#1 through it
-3. Making lots of tweaks to account for differences in the APIs (actually the hardest part because of enormous math ops going on)
+1. Refactoring FlexBook from Flex to pure ActionScript
+2. Writing [Acanvas ActionScript Converter](https://github.com/acanvas/acanvas-actionscript-converter).   
+3. Making lots of tweaks to account for differences in the APIs
 

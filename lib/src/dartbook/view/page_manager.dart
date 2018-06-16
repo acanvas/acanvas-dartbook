@@ -6,7 +6,7 @@ part of dartbook;
  * @see			BookEvent#CONTENT_CHANGED
  * @see			PageManager#pages
  */
-// [Event(name="contentChanged", type="com.rockdot.library.view.component.book.view.BookEvent")]
+// [Event(name="contentChanged", type="com.acanvas.library.view.component.book.view.BookEvent")]
 
 /**
  * PageManager provides the core functionality for the Book class.

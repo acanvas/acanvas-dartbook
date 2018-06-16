@@ -9,7 +9,7 @@ class MdSamplePage extends Page {
   @override
   void init({Map<String, String> params: null}) {
     super.init();
-    RdGraphics.rectangle(0, 0, 450, 600, color: Color.White, sprite: this, clear: false);
+    AcGraphics.rectangle(0, 0, 450, 600, color: Color.White, sprite: this, clear: false);
 
     /* Vertical Container */
     Wrap vbox = new Wrap(spacing: 20, reflow: false)

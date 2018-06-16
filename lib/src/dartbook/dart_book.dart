@@ -5,19 +5,19 @@ part of dartbook;
  * @eventType	com.rubenswieringa.book.BookEvent.PAGEFLIP_STARTED
  * @see			BookEvent#PAGEFLIP_STARTED
  */
-// [Event(name="pageflipStarted", type="com.rockdot.library.view.component.book.view.BookEvent")]
+// [Event(name="pageflipStarted", type="com.acanvas.library.view.component.book.view.BookEvent")]
 /**
  * Dispatched when the user releases the corner of a page. Note that this Event is dispatched just before the page starts falling in place.
  * @eventType	com.rubenswieringa.book.BookEvent.PAGEFLIP_ENDING
  * @see			BookEvent#PAGEFLIP_FINISHED
  */
-// [Event(name="pageflipEnding", type="com.rockdot.library.view.component.book.view.BookEvent")]
+// [Event(name="pageflipEnding", type="com.acanvas.library.view.component.book.view.BookEvent")]
 /**
  * Dispatched when a page falls in place after being flipped. This Event is dispatched regardless of whether or not the page has been turned, or has fallen back into its original position.
  * @eventType	com.rubenswieringa.book.BookEvent.PAGEFLIP_FINISHED
  * @see			BookEvent#PAGE_TURNED
  */
-// [Event(name="pageflipFinished", type="com.rockdot.library.view.component.book.view.BookEvent")]
+// [Event(name="pageflipFinished", type="com.acanvas.library.view.component.book.view.BookEvent")]
 /**
  * Dispatched when the corner of a page is rolled over with the mouse.
  * Only applicable if the hover property is set to true.
@@ -25,7 +25,7 @@ part of dartbook;
  * @see			BookEvent#HOVER_STARTED
  * @see			Book#hover
  */
-// [Event(name="hoverStarted", type="com.rockdot.library.view.component.book.view.BookEvent")]
+// [Event(name="hoverStarted", type="com.acanvas.library.view.component.book.view.BookEvent")]
 /**
  * Dispatched when the corner of a page is rolled out of with the mouse. Note that this Event is dispatched just before the page starts falling back in place.
  * Only applicable if the hover property is set to true.
@@ -33,7 +33,7 @@ part of dartbook;
  * @see			BookEvent#PAGEFLIP_FINISHED
  * @see			Book#hover
  */
-// [Event(name="hoverEnding", type="com.rockdot.library.view.component.book.view.BookEvent")]
+// [Event(name="hoverEnding", type="com.acanvas.library.view.component.book.view.BookEvent")]
 /**
  * Dispatched when a page falls back in place after being rolled over with the mouse.
  * Only applicable if the hover property is set to true.
@@ -41,43 +41,43 @@ part of dartbook;
  * @see			BookEvent#PAGE_TURNED
  * @see			Book#hover
  */
-// [Event(name="hoverFinished", type="com.rockdot.library.view.component.book.view.BookEvent")]
+// [Event(name="hoverFinished", type="com.acanvas.library.view.component.book.view.BookEvent")]
 /**
  * Dispatched when a pageflip is successful.
  * @eventType	com.rubenswieringa.book.BookEvent.PAGE_TURNED
  * @see			BookEvent#PAGE_NOT_TURNED
  */
-// [Event(name="pageTurned", type="com.rockdot.library.view.component.book.view.BookEvent")]
+// [Event(name="pageTurned", type="com.acanvas.library.view.component.book.view.BookEvent")]
 /**
  * Dispatched when a pageflip is not successful.
  * @eventType	com.rubenswieringa.book.BookEvent.PAGE_NOT_TURNED
  * @see			BookEvent#PAGE_TURNED
  */
-// [Event(name="pageNotTurned", type="com.rockdot.library.view.component.book.view.BookEvent")]
+// [Event(name="pageNotTurned", type="com.acanvas.library.view.component.book.view.BookEvent")]
 /**
  * Dispatched when a Page is torn out of its Book.
  * @eventType	com.rubenswieringa.book.BookEvent.PAGE_TORN
  */
-// [Event(name="pageTorn", type="com.rockdot.library.view.component.book.view.BookEvent")]
+// [Event(name="pageTorn", type="com.acanvas.library.view.component.book.view.BookEvent")]
 /**
  * Dispatched at the same time as the page-turned Event, when the Book was previously closed, and the first or last Page was flipped successfully.
  * @eventType	com.rubenswieringa.book.BookEvent.BOOK_OPENED
  * @see			BookEvent#PAGE_TURNED
  */
-// [Event(name="bookOpened", type="com.rockdot.library.view.component.book.view.BookEvent")]
+// [Event(name="bookOpened", type="com.acanvas.library.view.component.book.view.BookEvent")]
 /**
  * Dispatched at the same time as the page-turned Event, when the Book was previously open, and the first or last Page was flipped successfully.
  * @eventType	com.rubenswieringa.book.BookEvent.BOOK_CLOSED
  * @see			BookEvent#PAGE_TURNED
  */
-// [Event(name="bookClosed", type="com.rockdot.library.view.component.book.view.BookEvent")]
+// [Event(name="bookClosed", type="com.acanvas.library.view.component.book.view.BookEvent")]
 /**
  * Dispatched at the same time as the page-turned Event, when the Book was previously open, and the first or last Page was flipped successfully.
  * @eventType	com.rubenswieringa.book.BookEvent.BOOK_CLOSED
  * @see			BookEvent#STATUS_CHANGED
  * @see			Book#status
  */
-// [Event(name="statusChanged", type="com.rockdot.library.view.component.book.view.BookEvent")]
+// [Event(name="statusChanged", type="com.acanvas.library.view.component.book.view.BookEvent")]
 
 /**
  * Book is a container class that creates a rich animated and interactive book from its contents, through which the end-user can browse by flipping the pages over (pageflip-effect).
@@ -381,7 +381,7 @@ class DartBook extends PageManager {
     hover = true;
 
     // add event listener:
-    if (Rd.MOBILE) {
+    if (Ac.MOBILE) {
       addEventListener<InputEvent>(TouchEvent.TOUCH_BEGIN, startPageFlip);
     } else {
       addEventListener<InputEvent>(MouseEvent.MOUSE_DOWN, startPageFlip);
@@ -468,7 +468,7 @@ class DartBook extends PageManager {
    * @
    */
   void startPageFlip([InputEvent event = null, bool attemptHover = false]) {
-    if (event != null && Rd.MOBILE) {
+    if (event != null && Ac.MOBILE) {
       updateTouchPosition(event);
       addEventListener<InputEvent>(TouchEvent.TOUCH_MOVE, updateTouchPosition);
     }
@@ -508,7 +508,7 @@ class DartBook extends PageManager {
         !lastFlipSucceeded) {
       // switch back to flipping mode if the same page corner was picked up:
       if (lastFlippedCorner == (getCurrentCorner()) && sideFlipActive == isPageSideHit()) {
-        if (Rd.MOBILE) {
+        if (Ac.MOBILE) {
           stage.addEventListener<InputEvent>(TouchEvent.TOUCH_END, endPageFlip);
         } else {
           stage.addEventListener<InputEvent>(MouseEvent.MOUSE_UP, endPageFlip);
@@ -587,9 +587,9 @@ class DartBook extends PageManager {
     dragPageCorner();
     // addEventListener(Event.ENTER_FRAME, dragPageCorner);
 
-    _onEnterFrameDragSubscription = Rd.JUGGLER.onElapsedTimeChange.listen((e) => dragPageCorner());
+    _onEnterFrameDragSubscription = Ac.JUGGLER.onElapsedTimeChange.listen((e) => dragPageCorner());
 
-    if (Rd.MOBILE) {
+    if (Ac.MOBILE) {
       stage.addEventListener<InputEvent>(TouchEvent.TOUCH_END, endPageFlip);
     } else {
       stage.addEventListener<InputEvent>(MouseEvent.MOUSE_UP, endPageFlip);
@@ -698,7 +698,7 @@ class DartBook extends PageManager {
     }
 
     // remove mouse-listener:
-    if (Rd.MOBILE) {
+    if (Ac.MOBILE) {
       removeEventListener(TouchEvent.TOUCH_MOVE, updateTouchPosition);
       stage.removeEventListener(TouchEvent.TOUCH_END, endPageFlip);
     } else {
@@ -1146,8 +1146,8 @@ class DartBook extends PageManager {
     // if gotoPage is not active then set the page corner target equal to the mouse position:
     if (!autoFlipActive) {
       // calculate coordinates:
-      x = Rd.MOBILE ? touchX : mouseX;
-      y = (!sideFlipActive) ? Rd.MOBILE ? touchY : mouseY : lastFlippedCorner.y * spanHeight;
+      x = Ac.MOBILE ? touchX : mouseX;
+      y = (!sideFlipActive) ? Ac.MOBILE ? touchY : mouseY : lastFlippedCorner.y * spanHeight;
       // adjust x per position of render:
       if (lastFlippedSide == Page.RIGHT) {
         x -= (spanWidth / 2);
@@ -1263,8 +1263,8 @@ class DartBook extends PageManager {
   Point getCurrentCorner() {
     Point corner = new Point(0, 0);
     // determine corner:
-    corner.x = (Rd.MOBILE ? touchX : mouseX) < spanWidth / 2 ? 0 : 1;
-    corner.y = (Rd.MOBILE ? touchY : mouseY) < spanHeight / 2 ? 0 : 1;
+    corner.x = (Ac.MOBILE ? touchX : mouseX) < spanWidth / 2 ? 0 : 1;
+    corner.y = (Ac.MOBILE ? touchY : mouseY) < spanHeight / 2 ? 0 : 1;
     // return value:
     return corner;
   }
@@ -1292,7 +1292,7 @@ class DartBook extends PageManager {
   bool isPageCornerHit([Point point = null]) {
     // if no point was provided, use the mouse coordinates:
     if (point == null) {
-      if (Rd.MOBILE) {
+      if (Ac.MOBILE) {
         point = new Point(touchX, touchY);
       } else {
         point = new Point(mouseX, mouseY);
@@ -1322,7 +1322,7 @@ class DartBook extends PageManager {
    */
   bool isPageSideHit([Point point = null]) {
     // if no point was provided, use the mouse coordinates:
-    if (Rd.MOBILE) {
+    if (Ac.MOBILE) {
       point = new Point(touchX, touchY);
     } else {
       point = new Point(mouseX, mouseY);
@@ -1348,7 +1348,7 @@ class DartBook extends PageManager {
   int getCurrentSide() {
     int side;
     if (!autoFlipActive) {
-      side = (Rd.MOBILE ? touchX : mouseX) <= spanWidth / 2 ? Page.LEFT : Page.RIGHT;
+      side = (Ac.MOBILE ? touchX : mouseX) <= spanWidth / 2 ? Page.LEFT : Page.RIGHT;
     } else {
       if (!tearActive) {
         side = (autoFlipIndex < _currentPage) ? Page.LEFT : Page.RIGHT;
@@ -1367,7 +1367,7 @@ class DartBook extends PageManager {
   void setLastFlippedTime() {
     if (flipOnClick && !autoFlipActive) {
       lastFlippedTime = /*getTimer()*/
-          (Rd.JUGGLER.elapsedTime * 1000).round();
+          (Ac.JUGGLER.elapsedTime * 1000).round();
     }
   }
 
@@ -1430,7 +1430,7 @@ class DartBook extends PageManager {
   bool get flipOnRelease {
     if (flipOnClick && !autoFlipActive) {
       return (/*getTimer()*/
-          (Rd.JUGGLER.elapsedTime * 1000) - lastFlippedTime <= DartBook.CLICK_INTERVAL);
+          (Ac.JUGGLER.elapsedTime * 1000) - lastFlippedTime <= DartBook.CLICK_INTERVAL);
     } else {
       return false;
     }
@@ -1501,7 +1501,7 @@ class DartBook extends PageManager {
     // add/remove listeners:
     if (_hoverEnabled) {
       //addEventListener(Event.ENTER_FRAME, evaluateHover);
-      _onEnterFrameHoverSubscription = Rd.JUGGLER.onElapsedTimeChange.listen((e) => evaluateHover());
+      _onEnterFrameHoverSubscription = Ac.JUGGLER.onElapsedTimeChange.listen((e) => evaluateHover());
     } else {
       //removeEventListener(Event.ENTER_FRAME, evaluateHover);
       _onEnterFrameHoverSubscription.cancel();

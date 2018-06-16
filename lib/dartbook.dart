@@ -5,7 +5,7 @@ import 'dart:math' hide Point, Rectangle;
 import 'dart:html' as html;
 
 import 'package:stagexl/stagexl.dart';
-import 'package:rockdot_commons/rockdot_commons.dart';
+import 'package:acanvas_commons/acanvas_commons.dart';
 
 part 'src/dartbook/dart_book.dart';
 part 'src/dartbook/containers/super_view_stack.dart';

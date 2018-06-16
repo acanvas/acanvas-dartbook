@@ -9,7 +9,7 @@ class DartBookExample {
     opts.renderEngine = RenderEngine.Canvas2D;
     opts.backgroundColor = 0xFFf9f9f9;
     opts.stageAlign = StageAlign.TOP_LEFT;
-    opts.inputEventMode = Rd.MOBILE ? InputEventMode.TouchOnly : InputEventMode.MouseOnly;
+    opts.inputEventMode = Ac.MOBILE ? InputEventMode.TouchOnly : InputEventMode.MouseOnly;
     opts.preventDefaultOnTouch = true;
     opts.preventDefaultOnWheel = true;
     opts.preventDefaultOnKeyboard = false;
@@ -17,7 +17,7 @@ class DartBookExample {
 
     stage = new Stage(html.querySelector('#stage') as html.CanvasElement, width: 840, height: 660, options: opts);
 
-    Rd.STAGE = stage;
+    Ac.STAGE = stage;
     new RenderLoop()..addStage(stage);
     BookSampleAssets.load(start);
   }

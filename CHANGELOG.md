@@ -1,8 +1,8 @@
-# CHANGELOG DARTBOOK
+# CHANGELOG ACANVAS DARTBOOK
 
 ## 0.1.0 2018-05-10
 
-- Moved from rockdot_commons into own project
+- Moved from acanvas_commons into own project
 - Enabled Dart 2 type system
 - Changed example to use page design from original FlexBook
 
