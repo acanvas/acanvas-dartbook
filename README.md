@@ -1,16 +1,25 @@
 # Acanvas Dartbook
 
-Page Flip Book component ported from Flex to ActionScript to Dart.
+*Acanvas Dartbook – for Dart 2.0 and StageXL.*
 
-Demo: <http://acanvas.sounddesignz.com/acanvas-dartbook> 
+*Acanvas Dartbook* is using *[Acanvas Framework](http://acanvas.sounddesignz.com/acanvas-framework/)* layered architecture [(diagram)](http://acanvas.sounddesignz.com/template/assets/home/acanvas_spring_architecture.png).
 
-- Original Author: Ruben Swieringa
-- Original Release Notes: <http://www.rubenswieringa.com/blog/flex-book-component-beta>
-- Original Inspiration: Eric Natzke for DreamWorks <http://welcome.hp.com/country/us/en/msg/corp/flashdreamworks.html>
+Build your own *Acanvas* project now – with *[Acanvas Generator](https://github.com/acanvas/acanvas-generator)*!
+* Blazing fast IoC/DI/MVC UI framework for WebGL and Canvas2D, written in Dart.
+* Write web apps, games, or both, in pure Dart. No HTML, no CSS, no JS.
+
+
+*Original Flexbook Author*: Ruben Swieringa
+
+*Original Release Notes*: <http://www.rubenswieringa.com/blog/flex-book-component-beta>
+
+*Original Inspiration*: Eric Natzke for DreamWorks <http://welcome.hp.com/country/us/en/msg/corp/flashdreamworks.html>
 
 ## Features
 
-- Pageflip effect (Captain Obvious)
+*Acanvas Dartbook* is aPage Flip Book component ported from Flex to ActionScript to Dart.
+
+- Pageflip effect (Captain Obvious).
 - Runs in any browser, on any device.
 - File size just 76KB gzipped.
 - Hardback option for every page, as well as a hardcover option for the containing book, automatically making the first and last pages hardback.
@@ -22,6 +31,13 @@ Demo: <http://acanvas.sounddesignz.com/acanvas-dartbook>
 - Transparency support for pages.
 - Live-bitmapping functionality for playing animation uninterrupted during pageflips.
 - Locking functionality to keep certain pages from being flipped.
+
+
+## Examples
+
+* The *[Acanvas Dartbook Demo](http://acanvas.sounddesignz.com/acanvas-dartbook)*. 
+* The best way to learn how to use *Acanvas Spring* and *Acanvas Framework* by generating a project with [Acanvas Generator](https://github.com/acanvas/acanvas-generator).
+
 
 
 ## Known Issues
